@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>동아리정보</title>
+    <img scr="https://www.google.com/url?sa=i&url=https%3A%2F%2Frogorogo.tistory.com%2F871&psig=AOvVaw1weQy0r2VzeRlEQ4KTn_ud&ust=1714411256953000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiOxeK15YUDFQAAAAAdAAAAABAI" alt="logo">
+
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        //fetch
+        function listing() {
+            fetch('/movie').then((res) => res.json()).then((data) => {
+                let rows = data['result']
+                //카드 비우기
+                $('#cards-box').empty()
+                rows.forEach((a) => {
+                    let comment = a['comment']
+                    let title = a['title']
+                    let desc = a['desc']
+                    let image = a['image']
+                    let star = a['star']
+
+                    let star_repeat = '⭐'.repeat(star)
+
+                    //카드 붙이기
+                    let temp_html = `<div class="col">
+                                        <div class="card h-100">
+                                            <img src="${image}"
+                                                class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${title}</h5>
+                                                <p class="card-text">${desc}</p>
+                                                <p>${star_repeat}</p>
+                                                <p class="mycomment">${comment}</p>
+                                            </div>
+                                        </div>
+                                    </div>`
+                    $('#cards-box').append(temp_html)
+                })
+
+            })
+        }
+
+        //클라이언트 만들기 - url, comment 정보 보내주기
+        function posting() {
+            //url 데이터 가져오기
+            let url = $('#url').val();
+            //comment 데이터 가져오기
+            let comment = $('#comment').val();
+
+            //form 데이터에 태워서 보내주기
+            let formData = new FormData();
+            formData.append("url_give", url);
+            formData.append("comment_give", comment);
+            formData.append("star_give", star);
+
+            fetch('/movie', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+                alert(data['msg'])
+                window.location.reload()
+            })
+        }
+
+        function open_box() {
+            $('#post-box').show()
+        }
+        function close_box() {
+            $('#post-box').hide()
+        }
+
+        function searchClubs() {
+    let searchText = document.getElementById("search-input").value.toLowerCase();
+
+    // 검색 결과를 담을 새로운 요소 생성
+    let searchResults = $('<div class="row row-cols-1 row-cols-md-4 g-4" id="search-results"></div>');
+
+    // 검색된 동아리만 필터링하여 새로운 요소에 추가
+    $('.card').each(function () {
+        let clubName = $(this).find('.card-title').text().toLowerCase();
+        if (clubName.includes(searchText)) {
+            searchResults.append($(this).clone()); // 동아리 카드를 복제하여 새로운 요소에 추가
+        }
+    });
+
+    // 기존 카드 박스 숨기고, 새로운 검색 결과를 보여줌
+    $('#cards-box').hide().after(searchResults);
+}
+        
+
+    </script>
+</head>
+
+<body>
+    <div class="mytitle">
+        <h1>동아리 정보</h1>
+        <button onclick="open_box()">동아리 검색하기</button>
+    </div>
+    <!-- 동아리 검색하는 창 -->
+    <div class="mypost" id="post-box">
+        <div class="input-group mb-3">
+            <input type="text" id="search-input" class="form-control" placeholder="동아리 이름 검색">
+            <button onclick="searchClubs()" class="btn btn-outline-secondary" type="button">검색</button>
+        </div>
+        <div class="mybtns">
+            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리1 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리2 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mycards">
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+                <!-- 기존 동아리 카드들이 여기에 있음 -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
