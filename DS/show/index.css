@@ -1,0 +1,129 @@
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
+.mytitle {
+  width: 100%;
+  height: 250px;
+
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('C:/Users/R user/OneDrive/바탕 화면/A_HA/ajou_logo.png');
+  background-position: center;
+  background-size: cover;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mytitle>button {
+  width: 200px;
+  height: 50px;
+
+  background-color: transparent;
+  color: white;
+
+  border-radius: 50px;
+  border: 1px solid white;
+
+  margin-top: 10px;
+}
+
+.mytitle > button:hover {
+  border: 2px solid white;
+}
+
+.mycomment {
+  color: gray;
+}
+
+.mycards {
+  margin: 20px auto 0px auto;
+  width: 95%;
+  max-width: 1200px;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  /* 그림자 효과 추가 */
+  transform: translateY(-5px);
+  /* 약간 위로 이동하는 효과 추가 */
+  transition: all 0.3s ease;
+  /* 부드러운 전환 효과 추가 */
+}
+
+.myshow {
+  width: 95%;
+  max-width: 500px;
+  margin: 20px auto 0px auto;
+  padding: 20px;
+  box-shadow: 0px 0px 3px 0px gray;
+
+  display: none;
+}
+
+.mybtns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.mybtns > button {
+  margin-right: 10px;
+}
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.show {
+  display: flex;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  margin: 20px 200px 20px 200px;
+  padding: 10px;
+}
+
+.show img {
+  max-width: 200px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.show-details {
+  flex: 1;
+}
+
+.show-details h2 {
+  margin-top: 0;
+}
+
+.btn-book {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
