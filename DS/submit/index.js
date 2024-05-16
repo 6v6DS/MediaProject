@@ -1,6 +1,6 @@
-$(document).ready(function(){
-    show_submit();
-});
+// $(document).ready(function(){
+//     show_submit();
+// });
 
 document.querySelectorAll('input[name="grade"]').forEach((radio)=>{
    radio.addEventLister('change', (event) => {
