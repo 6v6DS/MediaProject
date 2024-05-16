@@ -40,6 +40,34 @@ function listing() {
 }
 
 
+function posting() {
+    //데이터 가져오기
+    let iamge = $('#image').val();
+    let title = $('#title').val();
+    let date = $('#date').val();
+    let location = $('#location').val();
+    let price = $('#price').val();
+    let text = $('#text').val();
+    let comment = $('#comment').val();
+
+    //form 데이터에 태워서 보내주기
+    let formData = new FormData();
+    formData.append("image_give", image);
+    formData.append("title_give", title);
+    formData.append("date_give", date);
+    formData.append("location_give", location);
+    formData.append("price_give", price);
+    formData.append("text_give", text);
+    formData.append("comment_give", comment);
+    formData.append("location_give", location);
+
+    fetch('/show_contents', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+        alert(data['msg'])
+        window.location.reload()
+    })
+}
+
+
 function searchBtn() {
     searchClubs(); // 검색 함수 호출
 }
