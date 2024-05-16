@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>공연 예매창</title>
+   <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" type='text/css'>
+   <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+   <form class="quick-reservation">
+
+      <div class="container">
+         <header class="quick-reservation__header">
+            <h2 class="title">
+               SHOW Reservation
+            </h2>
+            <div class="close-icon">
+               <span></span>
+               <span></span>
+            </div>
+         </header>
+
+         <div class="quick-reservation__form">
+            <section class="form__content">
+               <div class="row-wrapper">
+                  <div class="ele count">
+                     <label for="count">count</label>
+                     <select name="count" id="count">
+                        <option value="hide">Count</option>
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">3</option>
+                        <option value="">4</option>
+                        <option value="">5</option>
+                        <option value="">6</option>
+                        <option value="">7</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="row-wrapper">
+                  <div class="ele name">
+                     <label for="Name">Name</label>
+                     <input type="text" value="" placeholder="Enter Name" id="name">
+                  </div>
+               </div>
+               <div class="row-wrapper">
+                  <div class="ele student_ID">
+                     <label for="student_ID">student_ID</label>
+                     <input type="text" value="" placeholder="Enter Student ID" id="student_ID">
+                  </div>
+               </div>
+               <div class="row-wrapper">
+                  <div class="ele major">
+                     <label for="major">major</label>
+                     <input type="text" value="" placeholder="Enter Major" id="major">
+                  </div>
+               </div>
+               <div class="row-wrapper">
+                  <div class="ele phone-number">
+                     <label for="phoneNumber">Phone Number</label>
+                     <input type="text" value="" placeholder="Enter Phone Number" id="phoneNumber">
+                  </div>
+               </div>
+               <div class="row-wrapper">
+                  <div class="ele etc">
+                     <label for="etc">기타사항</label>
+                     <input type="text" value="" placeholder="Enter etc" id="etc">
+                  </div>
+               </div>
+
+            </section>
+         </div>
+
+         <div class="reservation-info" id="info">
+            <div class="ele data">
+               <h4 class="data__head">Show Title</h4>
+               <p class="data__description" id="Title">Title name</p>
+            </div>
+            <div class="ele data">
+               <h4 class="data__head">Date</h4>
+               <p class="data__description" id="Date">May 17 2024</p>
+            </div>
+            <div class="ele data">
+               <h4 class="data__head">Price</h4>
+               <p class="data__description" id="Price">13000</p>
+            </div>
+         </div>
+
+         <footer class="form__footer">
+            <div class="footer-wrapper">
+               <input type="submit" onclick="show_order()" value="Reserve" class="">
+            </div>
+         </footer>
+      </div>
+
+   </form>
+
+   <p class="after" style="display: none; color: #777; font-weight: 200;">Reload the browser window everytime you close
+      the reservation form to show up again.</p>
+
+
+   <script src="index.js"></script>
+</body>
+
+</html>
