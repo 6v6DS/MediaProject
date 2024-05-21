@@ -6,114 +6,87 @@ $(document).ready(function () {
 
 //fetch
 function listing() {
-    fetch('/contents').then((res) => res.json()).then((data) => {
+    fetch('/shows').then((res) => res.json()).then((data) => {
         let rows = data['result']
         //카드 비우기
-        $('#show-box').empty()
+        $('#booking-card').empty()
         rows.forEach((a) => {
             let image = a['image']
             let title = a['title']
-            let date = a['date']
-            let location = a['location']
+            let sub_title = a['sub_title']
             let price = a['price']
-            let text = a['text']
+            let box_date = a['box_date']
+            let disclaimer = a['disclaimer']
 
             //카드 붙이기
-            let temp_html = `<div class="show">
-                                        <div class="show">
+            let temp_html = `<div class="col">
+                                        <div class="card h-100">
                                             <img src="${image}"
-                                                class="show-image">
-                                            <div class="show-details">
-                                                <h2 class="card-title">${title}</h2>
-                                                <p class="date">${date}</p>
-                                                <p class="location">${location}</p>
-                                                <p class="price">${price}</p>
-                                                <p class="text">${text}</p>
-                                                <button class="btn-book" onclick="bookTicket()">예매하기</button>
+                                                class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${title}</h5>
+                                                <p class="card-text">${desc}</p>
+                                                <p class="mycomment">${comment}</p>
                                             </div>
                                         </div>
                                     </div>`
-            $('#container').append(temp_html)
+            $('#booking-card').append(temp_html)
         })
 
     })
 }
 
 
-function posting() {
-    //데이터 가져오기
-    let iamge = $('#image').val();
-    let title = $('#title').val();
-    let date = $('#date').val();
-    let location = $('#location').val();
-    let price = $('#price').val();
-    let text = $('#text').val();
-    let comment = $('#comment').val();
-
-    //form 데이터에 태워서 보내주기
-    let formData = new FormData();
-    formData.append("image_give", image);
-    formData.append("title_give", title);
-    formData.append("date_give", date);
-    formData.append("location_give", location);
-    formData.append("price_give", price);
-    formData.append("text_give", text);
-    formData.append("comment_give", comment);
-    formData.append("location_give", location);
-
-    fetch('/show_contents', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
-        alert(data['msg'])
-        window.location.reload()
-    })
-}
-
-
-function searchBtn() {
-    searchClubs(); // 검색 함수 호출
-}
-
-//검색창 열고닫고
-function open_box() {
-    $('#show-box').show()
-}
-function close_box() {
-    $('#show-box').hide()
-}
-
 window.enterkeySearch = () => {
     if (window.event.keyCode == 13) {
-        searchClubs();
+        searchPost();
     }
 };
 
 function searchClubs() {
-    $('#search-button').click(function() {
-        searchClubs();
-    });
 
-    let searchText = $('#search-input').val().toLowerCase(); // 검색어 소문자로 변환
+    let searchText = document.getElementById("search-input").value.toLowerCase();
 
-    $('.show').each(function () {
-        let showTitle = $(this).find('.show-details h2').text().toLowerCase();
-        if (showTitle.includes(searchText)) {
-            $(this).show(); // 검색어를 포함한 공연은 보이도록 설정
-        } else {
-            $(this).hide(); // 검색어를 포함하지 않은 공연은 숨김
+    // 새로운 검색 결과를 표시하기 전에 화면을 새로고침
+    //window.location.reload();
+
+    // 검색 결과를 담을 새로운 요소 생성
+    let searchResults = $('<div class="row row-cols-1 row-cols-md-5 g-4" id="search-results"></div>');
+
+    // 검색된 동아리만 필터링하여 새로운 요소에 추가
+    $('.card').each(function () {
+        let clubName = $(this).find('.card-title').text().toLowerCase();
+        if (clubName.includes(searchText)) {
+            searchResults.append($(this).clone()); // 동아리 카드를 복제하여 새로운 요소에 추가
         }
     });
-}
 
+
+    // 기존 카드 박스 숨기고, 새로운 검색 결과를 보여줌
+    $('#cards-box').hide().after(searchResults);
+
+    // 검색 결과를 표시
+    $('#search-results').remove(); // 이전 검색 결과 삭제
+    $('#cards-box').after(searchResults);
+
+    searchButton.addEventListener('click', function(event) {
+        // 검색 버튼이 클릭되었을 때만 화면을 새로고침
+        if (event.type === 'click') {
+            location.reload();
+        }
+        searchClubs();
+    });
+    
+}
 
 searchButton.addEventListener("click", searchClubs);
 
 
-
-function bookTicket() {
-    //여기에 이제 버튼 누르면 예매창으로 이동
-    alert("예매가 완료되었습니다!");
+// 카드 body를 클릭하면 외부 사이트로 이동하는 함수
+function redirectToExternalSite(url) {
+    // 새 창에서 URL을 엽니다.
+    window.open(url, '_blank');
 }
 
 
-$('#search-button').click(function() {
-    searchClubs();
-});
+
