@@ -1,5 +1,4 @@
 
-
 $(document).ready(function () {
     listing();
 });
@@ -103,6 +102,7 @@ function searchClubs() {
     });
     
 }
+
 
 searchButton.addEventListener("click", searchClubs);
 
