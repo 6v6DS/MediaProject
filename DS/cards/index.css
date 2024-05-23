@@ -40,6 +40,7 @@
 }
 
 .mycards {
+    cursor: pointer;
     margin: 20px auto 0px auto;
     width: 95%;
     max-width: 1200px;
@@ -148,6 +149,7 @@ i {
 
 /* 뒤로가기 버튼 */
 .go-back {
+  cursor: pointer;
   position: absolute;
   left: 10px;
   top: 10px;
