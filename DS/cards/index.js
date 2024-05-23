@@ -1,37 +1,74 @@
 
 $(document).ready(function () {
+    $(".lightbox-blanket").toggle();
     listing();
+
+
+    // 검색 입력란에서 엔터 키를 누르면 검색 수행
+    $('#search-input').keypress(function (e) {
+        if (e.which === 13) {
+            searchClubs();
+        }
+    });
 });
 
+let cards = [];
+
+
 //fetch
+
 function listing() {
     fetch('/contents').then((res) => res.json()).then((data) => {
-        let rows = data['result']
-        //카드 비우기
-        $('#cards-box').empty()
-        rows.forEach((a) => {
-            let comment = a['comment']
-            let title = a['title']
-            let desc = a['desc']
-            let image = a['image']
-
-            //카드 붙이기
+        let rows = data['result'];
+        $('#cards-box').empty();
+        rows.forEach((a, index) => {
+            let comment = a['comment'];
+            let title = a['title'];
+            let desc = a['desc'];
+            let image = a['image'];
             let temp_html = `<div class="col">
-                                        <div class="card h-100">
-                                            <img src="${image}"
-                                                class="card-img-top">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${title}</h5>
-                                                <p class="card-text">${desc}</p>
-                                                <p class="mycomment">${comment}</p>
-                                            </div>
-                                        </div>
-                                    </div>`
-            $('#cards-box').append(temp_html)
-        })
-
-    })
+                                <div class="card h-100"  onclick="OpenProduct(${index})">
+                                    <img src="${image}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${title}</h5>
+                                        <p class="card-text">${desc}</p>
+                                        <p class="mycomment">${comment}</p>
+                                    </div>
+                                </div>
+                            </div>`;
+            $('#cards-box').append(temp_html);
+            cards.push({ title, desc, comment, image });
+        });
+    });
 }
+
+//Go Back
+function OpenProduct(index) {
+    //var index = $('.product-image[item-data="' + index + '"] img');
+    $(".lightbox-blanket").toggle();
+    // var lbi = $('.lightbox-blanket .product-image img');
+    // console.log($(i).attr("src"));
+    // $(lbi).attr("src", $(i).attr("src"));  
+    // $(".lightbox-blanket").toggle();
+
+    // var ptext = $('.mycards .card-title')
+    // console.log($(i).attr("text"))
+    // $(ptext).attr("text", $(i).attr("text"));
+
+    // var pdesc = $('.mycards .')
+
+    var card = cards[index];
+    $('#modal-title').text(card.title);
+    $('#modal-subtitle').text(card.desc);
+    $('#modal-tags').text(card.comment);
+    $('#modal-image').attr('src', card.image);
+    $('#modal-description').text(`${card.desc}`)
+
+
+}
+
+
+
 
 function posting() {
     //comment 데이터 가져오기
@@ -61,18 +98,12 @@ function close_box() {
     $('#post-box').hide()
 }
 
-window.enterkeySearch = () => {
-    if (window.event.keyCode == 13) {
-        searchPost();
-    }
-};
 
+
+//검색
 function searchClubs() {
 
     let searchText = document.getElementById("search-input").value.toLowerCase();
-
-    // 새로운 검색 결과를 표시하기 전에 화면을 새로고침
-    //window.location.reload();
 
     // 검색 결과를 담을 새로운 요소 생성
     let searchResults = $('<div class="row row-cols-1 row-cols-md-5 g-4" id="search-results"></div>');
@@ -93,22 +124,30 @@ function searchClubs() {
     $('#search-results').remove(); // 이전 검색 결과 삭제
     $('#cards-box').after(searchResults);
 
-    searchButton.addEventListener('click', function(event) {
+    searchButton.addEventListener('click', function (event) {
         // 검색 버튼이 클릭되었을 때만 화면을 새로고침
         if (event.type === 'click') {
             location.reload();
         }
         searchClubs();
     });
-    
+
 }
+
+//뒤로가기
+function GoBack() {
+    $(".lightbox-blanket").toggle();
+}
+
+//모달 제출 버튼
+function submitForm() {
+    // 여기에 제출 버튼 클릭 시 수행할 작업을 추가하세요.
+    console.log("동아리신청");
+    alert("동아리 신청이 완료되었습니다.");
+    GoBack(); // 제출 후 모달 닫기
+}
+
 
 
 searchButton.addEventListener("click", searchClubs);
 
-
-// 카드 body를 클릭하면 외부 사이트로 이동하는 함수
-function redirectToExternalSite(url) {
-    // 새 창에서 URL을 엽니다.
-    window.open(url, '_blank');
-}
