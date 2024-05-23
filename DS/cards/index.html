@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8">
@@ -19,6 +19,12 @@
 
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -32,6 +38,51 @@
 
 <body>
     <header id="header"></header>
+
+    <div class="lightbox-blanket">
+        <div class="pop-up-container">
+          <div class="pop-up-container-vertical">
+            <div class="pop-up-wrapper">
+              <div class="go-back" onclick="GoBack();"><i class="fa fa-arrow-left"></i>
+              </div>
+              <!-- 카드 -->
+              <div class="product-details">
+                  <!-- 이게 카드 왼쪽에 나오는정보 -->
+                <div class="product-left">
+                  <!-- 눌렀을때 정보 -->
+                  <div class="product-info">
+                    <!-- 제목 -->
+                    <div class="product-manufacturer" id="modal-title">TITLE</div>
+                    <!-- 눌렀을때 나오는 부제목.. 태권도. 음악 이렇게 -->
+                    <div class="product-title" id="modal-subtitle">
+                      Title details
+                    </div>
+                    <!-- 태그 -->
+                    <div class="product-price" id="modal-tags">
+                      #동아리 #라익디즈
+                    </div>
+                  </div>
+                  <!-- 눌렀을때 나오는 이미지 -->
+                  <div class="product-image">
+                    <img id="modal-image" src="https://via.placeholder.com/300" />
+                  </div>
+                </div>
+                <!-- 이게 카드 오른쪽에 나오는 정보 -->
+                <div class="product-right">
+                  <!-- 상세설명 -->
+                  <div class="product-description" id="modal-description">
+                    동아리에 대한 상세한 설명들 여기에 대박 길게 들어갈거임 여기가 뭐하는 동아리인지 뭘 할건지
+                    들어오면 뭐가 좋은지 앤드 동아리 회장 이름이라던가 등등
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-popup" onclick="submitForm()">동아리 가입하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- 바디 -->
     <div class="mytitle">
@@ -53,22 +104,23 @@
             <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
         </div>
     </div>
-
+    
+    <!-- 동아리 카드 -->
     <div class="mycards">
         <div class="row row-cols-1 row-cols-md-5 g-4" id="cards-box">
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100" onclick="OpenProduct(1)">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
-                        class="card-img-top">
-                        <div class="card-body" onclick="redirectToExternalSite('https://example.com')">
-                        <h5 class="card-title">동아리1 이름</h5>
-                        <p class="card-text">동아리에 대한 간단한 설명.</p>
-                        <p class="mycomment">한줄 소개</p>
+                        class="card-img-top" item-data="1">
+                        <div class="card-body">
+                        <h5 class="card-title" item-data="1">동아리1 이름</h5>
+                        <p class="card-text" item-data="1">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment" item-data="1">한줄 소개</p>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100" onclick="OpenProduct(2)">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
                         class="card-img-top">
                     <div class="card-body">
@@ -79,7 +131,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100"  onclick="OpenProduct(3)">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
                         class="card-img-top">
                     <div class="card-body">
@@ -90,7 +142,29 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100" onclick="OpenProduct(4)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col" >
+                <div class="card h-100" onclick="OpenProduct(5)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col" >
+                <div class="card h-100" onclick="OpenProduct(6)">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
                         class="card-img-top">
                     <div class="card-body">
@@ -101,29 +175,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card h-100">
-                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">동아리 이름</h5>
-                        <p class="card-text">동아리에 대한 간단한 설명.</p>
-                        <p class="mycomment">한줄 소개</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
-                        class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">동아리 이름</h5>
-                        <p class="card-text">동아리에 대한 간단한 설명.</p>
-                        <p class="mycomment">한줄 소개</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
+                <div class="card h-100" onclick="OpenProduct(7)">
                     <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
                         class="card-img-top">
                     <div class="card-body">
@@ -141,6 +193,8 @@
         </div>
     </div>
     
+
+
     <script src="index.js"></script> 
 
     <div id="footer"></div>
