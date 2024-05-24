@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리 활동 내역</title>
+    <link rel="stylesheet" href="./index.css">
+
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- <script>
+        $(document).ready(function(){
+            $("#header").load("./fixed/header.php");
+        });
+        $(document).ready(function(){
+            $("#footer").load("./fixed/footer.php");
+        });
+    </script> -->
+
+
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <h1>동아리 활동내역</h1>
+    <h3>
+        CLUB ACTIVITY
+    </h3>
+
+    <section class="list-wrap">
+
+        <label for="search-text" id="st">동아리 검색하기</label>
+        <input type="text" id="search-text" placeholder="search" class="search-box">
+
+        <ul id="list">
+            <span class="empty-item">no results</span>
+        </ul>
+
+    </section>
+
+    <script src="index.js"></script>
+    
+    <div id="footer-container"></div>
+
+</body>
+
+</html>
