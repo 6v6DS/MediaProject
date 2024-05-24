@@ -9,11 +9,14 @@
   <title>동아리가입</title>
   <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
   <!-- <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" type='text/css'>
   <link rel="stylesheet" href="index.css">
+
 </head>
 
 <body>
+
   <div class="row">
     <div class="col-md-12" id="application">
       <form onsubmit="return show_order()">
@@ -22,6 +25,10 @@
         <fieldset>
 
           <legend><span class="number">1</span> Your Basic Information</legend>
+
+          <label for="title" id="auto-conatiner">동아리:</label>
+          <input type="search" id="clubNameInput" oninput="fetchClubNames()" name="user_title">
+          <div id="suggestions"></div>
 
           <label for="name">이름:</label>
           <input type="text" id="name" name="user_name">
@@ -57,6 +64,33 @@
           <label for="act">하고 싶은 활동:</label>
           <textarea id="act" name="user_act"></textarea>
 
+
+          <!-- <label for="job">Job Role:</label>
+          <select id="job" name="user_job">
+            <optgroup label="Web">
+              <option value="frontend_developer">Front-End Developer</option>
+              <option value="php_developer">PHP Developer</option>
+              <option value="python_developer">Python Developer</option>
+              <option value="rails_developer">Rails Developer</option>
+              <option value="web_designer">Web Designer</option>
+              <option value="wordpress_developer">Wordpress Developer</option>
+            </optgroup>
+            <optgroup label="Mobile">
+              <option value="android_developer">Android Developer</option>
+              <option value="ios_developer">IOS Developer</option>
+              <option value="mobile_designer">Mobile Designer</option>
+            </optgroup>
+            <optgroup label="Business">
+              <option value="business_owner">Business Owner</option>
+              <option value="freelancer">Freelancer</option>
+            </optgroup>
+          </select> -->
+
+          <!-- <label>Interests:</label>
+          <input type="checkbox" id="development" value="interest_development" name="user_interest"><label class="light" for="development">Development</label><br>
+          <input type="checkbox" id="design" value="interest_design" name="user_interest"><label class="light" for="design">Design</label><br>
+          <input type="checkbox" id="business" value="interest_business" name="user_interest"><label class="light" for="business">Business</label>
+           -->
         </fieldset>
 
         <button onclick="show_order()" type="submit" class="btn">Submit</button>
@@ -65,6 +99,7 @@
     </div>
   </div>
   <script src="index.js"></script>
+
 
 </body>
 
