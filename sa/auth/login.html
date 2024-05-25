@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="auth-box">
+        <h2>Aha! LOGIN</h2>
+        <form id="login-form">
+            <div class="user-box">
+                <label for="studentid">ID</label>
+                <input type="text" id="studentid" name="studentid" required="">
+            </div>
+            <div class="user-box">         
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required="">
+            </div>
+            <div class="submit-container">
+                <button id="btn" type="submit" class="login-button raised">SIGN IN</button>
+            </div>
+        </form>
+        <p id="login-status"></p>
+    </div>
+
+    <script src="login_client.js"></script>
+</body>
+</html>
