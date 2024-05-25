@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>동아리검색</title>
+    <link rel="stylesheet" href="./club.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- <img scr="https://www.google.com/url?sa=i&url=https%3A%2F%2Frogorogo.tistory.com%2F871&psig=AOvVaw1weQy0r2VzeRlEQ4KTn_ud&ust=1714411256953000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJiOxeK15YUDFQAAAAAdAAAAABAI" alt="logo"> -->
+
+    <!-- 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#header").load("header.html");
+        });
+        $(document).ready(function(){
+            $("#footer").load("footer.html");
+        });
+    </script>
+</head>
+
+<body>
+    <header id="header"></header>
+
+    <div class="lightbox-blanket">
+        <div class="pop-up-container">
+          <div class="pop-up-container-vertical">
+            <div class="pop-up-wrapper">
+              <div class="go-back" onclick="GoBack();"><i class="fa fa-arrow-left"></i>
+              </div>
+              <!-- 카드 -->
+              <div class="product-details">
+                  <!-- 이게 카드 왼쪽에 나오는정보 -->
+                <div class="product-left">
+                  <!-- 눌렀을때 정보 -->
+                  <div class="product-info">
+                    <div class="product-name" id="modal-name">
+                        TITLE
+                    </div>
+                    <div class="product-category" id="modal-category">
+                      Title details
+                    </div>
+                    <div class="product-subtitle" id="modal-subtitle">
+                      #동아리 #라익디즈
+                    </div>
+                  </div>
+                  <!-- 눌렀을때 나오는 이미지 -->
+                  <div class="product-image">
+                    <img id="modal-image" src="https://via.placeholder.com/300" />
+                  </div>
+                </div>
+                <!-- 이게 카드 오른쪽에 나오는 정보 -->
+                <div class="product-right">
+                  <!-- 상세설명 -->
+                  <div class="product-location" id="modal-location">
+                    동아리에 대한 상세한 설명들 여기에 대박 길게 들어갈거임 여기가 뭐하는 동아리인지 뭘 할건지
+                    들어오면 뭐가 좋은지 앤드 동아리 회장 이름이라던가 등등
+                  </div>
+                  <div class="product-contact" id="modal-contact">
+                    동아리에 대한 상세한 설명들 여기에 대박 길게 들어갈거임 여기가 뭐하는 동아리인지 뭘 할건지
+                    들어오면 뭐가 좋은지 앤드 동아리 회장 이름이라던가 등등
+                  </div>
+                  <div class="product-sns" id="modal-sns">
+                    동아리에 대한 상세한 설명들 여기에 대박 길게 들어갈거임 여기가 뭐하는 동아리인지 뭘 할건지
+                    들어오면 뭐가 좋은지 앤드 동아리 회장 이름이라던가 등등
+                  </div>
+                  <div class="product-description" id="modal-description">
+                    동아리에 대한 상세한 설명들 여기에 대박 길게 들어갈거임 여기가 뭐하는 동아리인지 뭘 할건지
+                    들어오면 뭐가 좋은지 앤드 동아리 회장 이름이라던가 등등
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-popup" onclick="submitForm()">동아리 가입하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- 바디 -->
+    <div class="mytitle">
+        <h1>동아리 정보</h1>
+        <button onclick="open_box()" onkeyup="enterkeySearch()">동아리 검색하기 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart-fill" viewBox="0 0 16 16" style="position: relative; top: -2px;">
+            <path d="M6.5 13a6.47 6.47 0 0 0 3.845-1.258h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1A6.47 6.47 0 0 0 13 6.5 6.5 6.5 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13m0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018"/>
+            </svg>   
+        </button>
+    </div>
+
+    <!-- 동아리 검색하는 창 -->
+    <div class="mypost" id="post-box">
+        <div class="input-group mb-3">
+            <input type="text" id="search-input" class="form-control" placeholder="동아리 이름 검색">
+            <button onclick="searchClubs()" class="btn btn-outline-secondary" type="button">검색</button>
+        </div>
+        <div class="mybtns">
+            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+    
+    <!-- 동아리 카드 -->
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-5 g-4" id="cards-box">
+            <div class="col">
+                <div class="card h-100" onclick="OpenProduct(1)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top" item-data="1">
+                        <div class="card-body">
+                        <h5 class="card-title" item-data="1">동아리1 이름</h5>
+                        <p class="card-text" item-data="1">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment" item-data="1">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100" onclick="OpenProduct(2)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리2 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100"  onclick="OpenProduct(3)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100" onclick="OpenProduct(4)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col" >
+                <div class="card h-100" onclick="OpenProduct(5)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col" >
+                <div class="card h-100" onclick="OpenProduct(6)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100" onclick="OpenProduct(7)">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">동아리 이름</h5>
+                        <p class="card-text">동아리에 대한 간단한 설명.</p>
+                        <p class="mycomment">한줄 소개</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mycards">
+            <div class="row row-cols-1 row-cols-md-5 g-4" id="cards-box">
+                <!-- 기존 동아리 카드들이 여기에 있음 -->
+            </div>
+        </div>
+    </div>
+    
+
+
+    <script src="club_client.js"></script> 
+
+    <div id="footer"></div>
+
+</body>
+
+</html>
