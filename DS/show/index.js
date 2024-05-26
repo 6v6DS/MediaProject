@@ -1,6 +1,7 @@
 
 
 $(document).ready(function () {
+    $(".lightbox-blanket").toggle();
     listing();
 });
 
@@ -10,7 +11,7 @@ function listing() {
         let rows = data['result']
         //카드 비우기
         $('#booking-card').empty()
-        rows.forEach((a) => {
+        rows.forEach((a, index) => {
             let image = a['image']
             let title = a['title']
             let sub_title = a['sub_title']
@@ -19,22 +20,67 @@ function listing() {
             let disclaimer = a['disclaimer']
 
             //카드 붙이기
-            let temp_html = `<div class="col">
-                                        <div class="card h-100">
-                                            <img src="${image}"
-                                                class="card-img-top">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${title}</h5>
-                                                <p class="card-text">${desc}</p>
-                                                <p class="mycomment">${comment}</p>
-                                            </div>
-                                        </div>
-                                    </div>`
-            $('#booking-card').append(temp_html)
+            let temp_html = `<li class="booking-card" class="image"
+            style="background-image: url(${image})">
+            <div class="book-container">
+                <div class="content">
+                    <button class="btn">예매하기</button>
+                </div>
+            </div>
+            <div class="informations-container" onclick="OpenProduct(${index})">
+            <h2 class="title">${title}</h2>
+            <p class="sub_title">${sub_title}</p>
+            <p class="price">${price}</p>
+            <div class="more-information">
+                <div class="info-and-date-container">
+                    <div class="box_date">
+                        <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
+                        </svg>
+                        <p>${box_date}</p>
+                    </div>
+                </div>
+                <p class="disclaimer">${disclaimer}</p>
+            </div>
+        </div>
+        </li>`
+            $('#book').append(temp_html)
         })
 
     })
 }
+
+
+function save_comment() {
+    let name = $("#name").val();
+    let show_title = $("#show-title").val();
+    let show_description = $("#show-description").val();
+    let show_price = $("#show-price").val();
+    let datetime = $("#datetime").val();
+    let comment = $("#comment").val();
+    let image_url = $("#image-url").val();
+    
+    let formData = new FormData();
+
+    formData.append("name_give", name);
+    formData.append("show_title_give", show_title);
+    formData.append("show_description_give", show_description);
+    formData.append("show_price_give", show_price);
+    formData.append("datetime_give", datetime);
+    formData.append("comment_give", comment);
+    formData.append("image_url_give", image_url);
+
+    fetch('/shows', { method: "POST", body: formData, }).then((res) => res.json()).then((data) => {
+      //console.log(data)
+      alert(data['신청되었습니다']);
+      //페이지 새로고침
+      window.location.reload();
+    });
+
+    
+  }
+
 
 
 window.enterkeySearch = () => {
@@ -79,6 +125,16 @@ function searchClubs() {
     
 }
 
+//검색창 열고닫고
+function open_box() {
+    $('#post-box').show()
+}
+function close_box() {
+    $('#post-box').hide()
+}
+
+
+
 searchButton.addEventListener("click", searchClubs);
 
 
@@ -89,4 +145,31 @@ function redirectToExternalSite(url) {
 }
 
 
+//모달창
+function OpenProduct(index) {
+    //var index = $('.product-image[item-data="' + index + '"] img');
+    $(".lightbox-blanket").toggle();
+
+
+    var card = cards[index];
+    $('#modal-title').text(card.title);
+    $('#modal-subtitle').text(card.desc);
+    $('#modal-tags').text(card.comment);
+    $('#modal-image').attr('src', card.image);
+    $('#modal-description').text(`${card.desc}`)
+
+
+}
+
+//뒤로가기
+function GoBack() {
+    $(".lightbox-blanket").toggle();
+}
+
+//모달 제출 버튼
+function submitForm() {
+    console.log("공연예매");
+    alert("공연 예매 창으로 이동합니다.");
+    GoBack(); // 제출 후 모달 닫기
+}
 
