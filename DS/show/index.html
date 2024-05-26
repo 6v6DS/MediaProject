@@ -13,8 +13,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- 폰트 -->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <script>
         $(document).ready(function () {
             $("#header").load("header.html");
@@ -31,10 +40,99 @@
     <!-- 상단 박스 -->
     <div class="mytitle">
         <h1>공연 예매하기</h1>
+        <button onclick="open_box()" onkeyup="enterkeySearch()">공연 정보 추가하기 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart-fill" viewBox="0 0 16 16" style="position: relative; top: -2px;">
+            <path d="M6.5 13a6.47 6.47 0 0 0 3.845-1.258h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1A6.47 6.47 0 0 0 13 6.5 6.5 6.5 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13m0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018"/>
+            </svg>   
+        </button>
     </div>
 
+    <div class="mypost" id="post-box">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="name" placeholder="url" />
+          <label for="floatingInput">동아리 이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="show-title" placeholder="공연 제목">
+            <label for="show-title">공연 제목</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea class="form-control" id="show-description" placeholder="간단한 설명" style="height: 50px"></textarea>
+            <label for="show-description">간단한 설명</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="show-price" placeholder="가격"></textarea>
+            <label for="show-price">가격</label>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">날짜</label>
+            <input type="datetime-local" class= "form-control" id="datetime" name="datetime">
+        </div>
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Leave a comment here" id="comment" style="height: 100px"></textarea>
+          <label for="floatingTextarea2">공연 설명</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="image-url" placeholder="공연 이미지 URL">
+            <label for="image-url">공연 이미지 URL</label>
+        </div>
+        <button onclick="save_comment()" type="button" class="btn btn-dark">
+          공연 정보 추가하기
+        </button>
+        <div class="mybtns">
+            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+
+    <!-- 모달창 -->
+    <div class="lightbox-blanket">
+        <div class="pop-up-container">
+            <div class="pop-up-container-vertical">
+                <div class="pop-up-wrapper">
+                    <div class="go-back" onclick="GoBack();"><i class="fa fa-arrow-left"></i>
+                    </div>
+                    <!-- 카드 -->
+                    <div class="product-details">
+                        <!-- 이게 카드 왼쪽에 나오는정보 -->
+                        <div class="product-left">
+                            <!-- 눌렀을때 정보 -->
+                            <div class="product-info">
+                                <!-- 제목 -->
+                                <div class="product-manufacturer" id="modal-title">SHOW TITLE</div>
+                                <!-- 눌렀을때 나오는 부제목.. 태권도. 음악 이렇게 -->
+                                <div class="product-title" id="modal-subtitle">
+                                    간단 설명
+                                </div>
+                                <!-- 태그 -->
+                                <div class="product-price" id="modal-tags">
+                                    Price
+                                </div>
+                            </div>
+                            <!-- 눌렀을때 나오는 이미지 -->
+                            <div class="product-image">
+                                <img id="modal-image" src="https://via.placeholder.com/300" />
+                            </div>
+                        </div>
+                        <!-- 이게 카드 오른쪽에 나오는 정보 -->
+                        <div class="product-right">
+                            <!-- 상세설명 -->
+                            <div class="product-description" id="modal-description">
+                                공연에 대한 상세 정보
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-popup" onclick="submitForm()">공연 예매하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <h1 class="h1-title">Tickets Booking</h1>
-    <ul>
+    <ul id="book">
         <li class="booking-card" class="image"
             style="background-image: url(https://images.unsplash.com/photo-1578944032637-f09897c5233d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ)">
             <div class="book-container">
@@ -42,7 +140,7 @@
                     <button class="btn">예매하기</button>
                 </div>
             </div>
-            <div class="informations-container">
+            <div class="informations-container" onclick="OpenProduct(1)">
                 <h2 class="title">공연 제목</h2>
                 <p class="sub_title">간단 설명입니다</p>
                 <p class="price">가격</p>
@@ -67,7 +165,7 @@
                     <button class="btn">예매하기</button>
                 </div>
             </div>
-            <div class="informations-container">
+            <div class="informations-container" onclick="OpenProduct(2)">
                 <h2 class="title">공연 제목</h2>
                 <p class="sub_title">간단 설명</p>
                 <p class="price">가격</p>
@@ -92,7 +190,7 @@
                     <button class="btn">에매하기</button>
                 </div>
             </div>
-            <div class="informations-container">
+            <div class="informations-container" onclick="OpenProduct(3)">
                 <h2 class="title">공연 제목</h2>
                 <p class="sub_title">간단한 설명</p>
                 <p class="price">가격</p>
@@ -111,13 +209,13 @@
             </div>
         </li>
         <li class="booking-card"
-            style="background-image: url(https://images.unsplash.com/photo-1532509854226-a2d9d8e66f8e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
+            style="background-image: url(https://images.unsplash.com/photo-1579489225078-27977a77bf72?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
             <div class="book-container">
                 <div class="content">
-                    <button class="btn">예매하기</button>
+                    <button class="btn">에매하기</button>
                 </div>
             </div>
-            <div class="informations-container">
+            <div class="informations-container" onclick="OpenProduct(4)">
                 <h2 class="title">공연 제목</h2>
                 <p class="sub_title">간단한 설명</p>
                 <p class="price">가격</p>
@@ -131,7 +229,82 @@
                             <p>날짜</p>
                         </div>
                     </div>
-                    <p class="disclaimer">설명</p>
+                    <p class="disclaimer">공연 설명</p>
+                </div>
+            </div>
+        </li>
+        <li class="booking-card"
+            style="background-image: url(https://images.unsplash.com/photo-1579489225078-27977a77bf72?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
+            <div class="book-container">
+                <div class="content">
+                    <button class="btn">에매하기</button>
+                </div>
+            </div>
+            <div class="informations-container" onclick="OpenProduct(5)">
+                <h2 class="title">공연 제목</h2>
+                <p class="sub_title">간단한 설명</p>
+                <p class="price">가격</p>
+                <div class="more-information">
+                    <div class="info-and-date-container">
+                        <div class="box_date">
+                            <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
+                            </svg>
+                            <p>날짜</p>
+                        </div>
+                    </div>
+                    <p class="disclaimer">공연 설명</p>
+                </div>
+            </div>
+        </li>
+        <li class="booking-card"
+            style="background-image: url(https://images.unsplash.com/photo-1579489225078-27977a77bf72?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
+            <div class="book-container">
+                <div class="content">
+                    <button class="btn">에매하기</button>
+                </div>
+            </div>
+            <div class="informations-container" onclick="OpenProduct(6)">
+                <h2 class="title">공연 제목</h2>
+                <p class="sub_title">간단한 설명</p>
+                <p class="price">가격</p>
+                <div class="more-information">
+                    <div class="info-and-date-container">
+                        <div class="box_date">
+                            <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
+                            </svg>
+                            <p>날짜</p>
+                        </div>
+                    </div>
+                    <p class="disclaimer">공연 설명</p>
+                </div>
+            </div>
+        </li>
+        <li class="booking-card"
+            style="background-image: url(https://images.unsplash.com/photo-1579489225078-27977a77bf72?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);">
+            <div class="book-container">
+                <div class="content">
+                    <button class="btn">에매하기</button>
+                </div>
+            </div>
+            <div class="informations-container" onclick="OpenProduct(7)">
+                <h2 class="title">공연 제목</h2>
+                <p class="sub_title">간단한 설명</p>
+                <p class="price">가격</p>
+                <div class="more-information">
+                    <div class="info-and-date-container">
+                        <div class="box_date">
+                            <svg class="icon" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
+                            </svg>
+                            <p>날짜</p>
+                        </div>
+                    </div>
+                    <p class="disclaimer">공연 설명</p>
                 </div>
             </div>
         </li>
