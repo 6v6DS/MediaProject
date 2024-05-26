@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동아리가입</title>
+  <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+  <!-- <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" type='text/css'>
+  <link rel="stylesheet" href="./submit.css">
+
+  <script>
+    $(document).ready(function () {
+        $("#header").load("header.html");
+    });
+    $(document).ready(function () {
+        $("#footer").load("footer.html");
+    });
+</script>
+</head>
+
+<body>
+  <header id="header"></header>
+  
+  <div class="row">
+    <div class="col-md-12" id="application">
+      <form onsubmit="return show_order(event)">
+        <h1> 동아리 가입 신청하기 </h1>
+
+        <fieldset>
+
+          <legend><span class="number">1</span> Your Basic Information</legend>
+
+          <label for="title" id="auto-conatiner">동아리:</label>
+          <input type="search" id="clubNameInput" oninput="fetchClubNames()" name="user_title">
+          <div id="suggestions"></div>
+
+          <label for="name">이름:</label>
+          <input type="text" id="name" name="user_name">
+
+          <label for="studentID">학번:</label>
+          <input type="number" id="studentID" name="user_studentID">
+
+          <label for="grade">학년:</label>
+            <input type="radio" id="1st" value="1st" name="grade"><label for="1st" class="light">1학년</label><br>
+            <input type="radio" id="2nd" value="2nd" name="grade"><label for="2nd" class="light">2학년</label><br>
+            <input type="radio" id="3rd" value="3rd" name="grade"><label for="3rd" class="light">3학년</label><br>
+            <input type="radio" id="4th" value="4th" name="grade"><label for="4th" class="light">4학년</label><br>
+            <input type="radio" id="5th" value="5th" name="grade"><label for="5th" class="light">5학년 이상</label><br>
+          <br>
+
+          <label for="major">학과:</label>
+          <input type="text" id="major" name="user_major">
+
+          <label for="phone">전화번호:</label>
+          <input type="number" id="phone" name="user_phone">
+
+          <label for="age">나이:</label>
+          <input type="number" id="age" name="user_age">
+
+        </fieldset>
+        <fieldset>
+
+          <legend><span class="number">2</span> For club</legend>
+
+          <label for="bio">동아리에 가입하고 싶은 이유:</label>
+          <textarea id="bio" name="user_bio"></textarea>
+
+          <label for="act">하고 싶은 활동:</label>
+          <textarea id="act" name="user_act"></textarea>
+
+
+        </fieldset>
+
+        <button onclick="show_order()" type="submit" class="btn">Submit</button>
+
+      </form>
+    </div>
+  </div>
+  <script src="./submit.js"></script>
+  <div id="footer"></div>
+
+</body>
+
+</html>

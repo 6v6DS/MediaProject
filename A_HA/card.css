@@ -1,0 +1,335 @@
+* {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.mytitle {
+    width: 100%;
+    height: 250px;
+
+    background-color: #79b9d2;
+    background-position: center;
+    background-size: cover;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mytitle>button {
+    width: 200px;
+    height: 50px;
+
+    background-color: transparent;
+    color: white;
+
+    border-radius: 50px;
+    border: 1px solid white;
+
+    margin-top: 10px;
+}
+
+.mytitle>button:hover { 
+    border: 2px solid white;
+}
+
+.mycomment {
+    color: gray;
+}
+
+.mycards {
+    cursor: pointer;
+    margin: 20px auto 0px auto;
+    width: 95%;
+    max-width: 1200px;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+    transform: translateY(-5px); /* 약간 위로 이동하는 효과 추가 */
+    transition: all 0.3s ease; /* 부드러운 전환 효과 추가 */
+}
+
+.mypost {
+    width: 95%;
+    max-width: 500px;
+    margin: 20px auto 0px auto;
+    padding: 20px;
+    box-shadow: 0px 0px 3px 0px gray;
+
+    display: none;
+}
+
+.mybtns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.mybtns>button {
+    margin-right: 10px;
+}
+
+
+
+/* 모달들 시작 */
+* {
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+::selection {
+  background-color: white;
+}
+
+i {
+  font-size: 20px;
+}
+
+
+/* 카드 눌렀을 때 뒷배경 및 위치 */
+.lightbox-blanket {
+  display: none;
+  background-color: rgba(30, 30, 30, 0.9);
+  display: block;
+  height: 100vh;
+  position: fixed;
+  overflow-y: scroll;
+  top: 0;
+  width: 100vw;
+  z-index: 20;
+}
+
+/* 카드 눌렀을 때 위치 */
+.pop-up-container {
+  display: none;
+  height: 100%;
+  width: auto;
+  display: table;
+  margin: auto;
+  position: static;
+}
+
+@media (max-width: 400px) {
+  .pop-up-container {
+    width: 96%;
+    margin: 2%;
+  }
+}
+
+/* 카드 눌렀을때 위치 가운데로 고정해주는거 */
+.pop-up-container-vertical {
+  height: 100%;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+/* 이거 버튼 위치랑 박스 쉐도우 */
+.pop-up-wrapper {
+  -webkit-box-shadow: -45px 49px 83px 1px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: -45px 49px 83px 1px rgba(0, 0, 0, 0.45);
+  box-shadow: -45px 49px 83px 1px rgba(0, 0, 0, 0.45);
+  display: block;
+  margin: 20px auto;
+  width: auto;
+  position: relative;
+}
+
+/* 팝업 뒷배경 */
+.pop-up-wrapper {
+  background-color: white;
+  display: block;
+  padding: 50px;
+}
+
+/* 뒤로가기 버튼 */
+.go-back {
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #222;
+  width: 0;
+  height: 0;
+  border-top: 60px solid #79b9d2;
+  border-right: 60px solid transparent;
+}
+
+.go-back i {
+  font-size: 20px;
+  position: relative;
+  top: -52px;
+  left: 10px;
+}
+
+/* 팝업 상세정보 */
+.product-details {
+  max-width: 600px;
+}
+
+/* 팝업 왼쪽 사항들 */
+.product-left {
+  display: inline-block;
+  padding-right: 4%;
+  vertical-align: top;
+  width: 46%;
+}
+
+/* 팝업 오른쪽 사항들 */
+.product-right {
+  display: inline-block;
+  vertical-align: top;
+  width: 49%;
+}
+
+/* 팝업 밑에 가격이랑 카트담기 */
+.product-bottom {
+  border-top: 1px solid #ccc;
+  position: relative;
+  padding-top: 20px;
+}
+
+@media (max-width: 650px) {
+  .product-left,
+  .product-right,
+  .product-bottom {
+    width: 100%;
+  }
+  .product-left {
+    padding-right: 0;
+  }
+  .product-info {
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+  }
+  .product-image {
+    display: inline-block;
+    width: 39%;
+    vertical-align: top;
+  }
+}
+
+@media (max-width: 512px) {
+  .product-info,
+  .product-image {
+    width: 100%;
+  }
+}
+
+/* 팝업 크기 살짝 조정 */
+.product-manufacturer {
+  color: #222;
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 1;
+  margin: -2px;
+}
+
+/* 팝업 글씨 */
+.product-title {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #888;
+}
+
+/* 팝업 가격 */
+.product-price {
+    margin-top: 10px;
+  color: #222;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+/* 가격에 밑줄 */
+.product-price-cents {
+  text-decoration: underline;
+  vertical-align: top;
+  padding-left: 3px;
+}
+
+/* 이미지 조정 */
+.product-image {
+  padding: 10px 10px 0 10px;
+}
+
+/* 이미지 조정 */
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  height: 295px;
+}
+
+/* 이 밑에 다 그거 팝업  */
+.product-description {
+  line-height: 1.5;
+}
+
+.product-available {
+  margin-top: 25px;
+}
+
+.product-rating {
+  margin-top: 25px;
+}
+
+
+.product-rating-details {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+@media (max-width: 515px) {
+  .product-rating-details {
+    padding-left: 0;
+  }
+}
+
+.product-extended {
+  color: #235ba8;
+  padding-left: 5px;
+}
+.product-quantity {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+
+/* 대문자로 해주는거 여기 밑에 다 quantity 관련된거라 */
+.product-quantity-label {
+  text-transform: uppercase;
+}
+
+/* 7. Trumps - text helpers, often !important */
+
+.hidden {
+  display: none;
+}
+
+.btn-popup {
+    background-color: #79b9d2; /* 초록색 */
+    color:#79b9d2;
+}
+
+.btn-popup:hover {
+    background-color: #79b9d2; /* 어두운 초록색 */
+} 
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: white; /* 모달 배경과 동일하게 */
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}
+

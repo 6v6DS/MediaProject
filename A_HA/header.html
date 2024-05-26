@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" type='text/css'>
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        *,
+        *:before,
+        *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 60px;
+            top: 0;
+            z-index: 9 !important;
+        }
+
+        body {
+            height: 100%;
+            background: #fff;
+            line-height: 1.5;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            font-size: 16px;
+            /* color: #fff; */
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #custom-header {
+            background: #1e262d;
+            width: 100%;
+            position: relative;
+        }
+
+        #custom-header:after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+
+        .custom-search {
+            float: right;
+            padding: 30px;
+        }
+
+        .custom-input {
+            border: none;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .custom-logo {
+            float: left;
+            padding: 26px 0 26px;
+        }
+
+        .custom-logo a {
+            font-size: 28px;
+            display: block;
+            padding: 0 0 0 20px;
+        }
+
+        .custom-nav {
+            float: right;
+        }
+
+        .custom-nav>ul {
+            float: left;
+            position: relative;
+        }
+
+        .custom-nav ul {
+            float: left;
+            position: relative;
+        }
+
+        .custom-nav li {
+            list-style: none;
+            float: left;
+        }
+
+        .custom-nav .custom-dropdown {
+            position: relative;
+        }
+
+        .custom-nav li a {
+            float: left;
+            padding: 35px;
+        }
+
+        .custom-nav li a:hover {
+            background: #2c3e50;
+        }
+
+        .custom-nav li ul {
+            display: none;
+        }
+
+        .custom-nav li:hover ul {
+            display: inline;
+        }
+
+        .custom-nav li li {
+            float: none;
+        }
+
+        .custom-nav .custom-dropdown ul {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: #fff;
+            padding: 20px 0;
+            border-bottom: 3px solid #34495e;
+        }
+
+        .custom-nav .custom-dropdown li {
+            white-space: nowrap;
+        }
+
+        .custom-nav .custom-dropdown li a {
+            padding: 10px 35px;
+            font-size: 13px;
+            min-width: 200px;
+        }
+
+        .custom-nav .custom-mega-dropdown {
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            overflow: hidden;
+            padding: 20px 35px;
+            border-bottom: 3px solid #34495e;
+        }
+
+        .custom-nav li li a {
+            float: none;
+            color: #333;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+
+        .custom-nav li li a:hover {
+            background: #bdc3c7;
+            background: #fafbfb;
+        }
+
+        .custom-mega-col {
+            width: 25%;
+            float: left;
+        }
+
+        #custom-menu-icon {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -12px;
+            margin-right: 30px;
+            display: none;
+        }
+
+        #custom-menu-icon span {
+            border: 2px solid #fff;
+            width: 30px;
+            margin-bottom: 5px;
+            display: block;
+            -webkit-transition: all 0.2s;
+            transition: all 0.1s;
+        }
+
+        @media only screen and (max-width: 1170px) {
+            .custom-nav>ul>li>a {
+                padding: 35px 15px;
+            }
+        }
+
+        @media only screen and (min-width: 960px) {
+            .custom-nav {
+                display: block !important;
+            }
+        }
+
+        @media only screen and (max-width: 959px) {
+            .custom-nav {
+                display: none;
+                width: 100%;
+                clear: both;
+                float: none;
+                max-height: 400px;
+                overflow-y: scroll;
+            }
+
+            #custom-menu-icon {
+                display: inline;
+                top: 45px;
+                cursor: pointer;
+            }
+
+            #custom-menu-icon.active .custom-first {
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                margin-top: 10px;
+            }
+
+            #custom-menu-icon.active .custom-second {
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+                position: relative;
+                top: -9px;
+            }
+
+            #custom-menu-icon.active .custom-third {
+                display: none;
+            }
+
+            .custom-search {
+                float: none;
+            }
+
+            .custom-search .custom-input {
+                width: 100%;
+            }
+
+            .custom-nav {
+                padding: 10px;
+            }
+
+            .custom-nav ul {
+                float: none;
+            }
+
+            .custom-nav li {
+                float: none;
+            }
+
+            .custom-nav ul li a {
+                float: none;
+                padding: 8px;
+                display: block;
+            }
+
+            #custom-header .custom-nav ul ul {
+                display: block;
+                position: static;
+                background: none;
+                border: none;
+                padding: 0;
+            }
+
+            #custom-header .custom-nav a {
+                color: #fff;
+                padding: 8px;
+            }
+
+            #custom-header .custom-nav a:hover {
+                background: #fff;
+                color: #333;
+                border-radius: 3px;
+            }
+
+            #custom-header .custom-nav ul li li a:before {
+                content: "- ";
+            }
+
+            .custom-mega-col {
+                width: 100%;
+            }
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('#custom-header').prepend('<div id="custom-menu-icon"><span class="custom-first"></span><span class="custom-second"></span><span class="custom-third"></span></div>');
+
+            $("#custom-menu-icon").on("click", function () {
+                $(".custom-nav").slideToggle();
+                $(this).toggleClass("active");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="header-container">
+        <div id="custom-header">
+            <div class="custom-logo">
+                <a href="#">A_HA 아하!</a>
+            </div>
+            <nav class="custom-nav">
+                <ul class="custom-ul">
+                    <li class="custom-dropdown custom-li">
+                        <a href="./card.html">Home</a>
+                        <ul class="custom-ul">
+                            <li class="custom-li"><a href="./calendar.html">캘린더</a></li>
+                        </ul>
+                    </li>
+                    <li class="custom-dropdown custom-li">
+                        <a href="./card.html">Join</a>
+                        <ul class="custom-ul">
+                            <li class="custom-li"><a href="./card.html">동아리 정보</a></li>
+                            <li class="custom-li"><a href="./submit.html">동아리 가입</a></li>
+                            <li class="custom-li"><a href="./recruit.html">신규 동아리 등록</a></li>
+                        </ul>
+                    </li>
+                    <li class="custom-dropdown custom-li">
+                        <a href="./show2.html">Show</a>
+                        <ul class="custom-ul">
+                            <li class="custom-li"><a href="./show2.html">공연 안내</a></li>
+                            <li class="custom-li"><a href="./show_submit.html">공연 예매</a></li>
+                        </ul>
+                    </li>
+                    <li class="custom-li">
+                        <a href="./club_activity2.html">Club activity</a>
+                    </li>
+                    <li class="custom-li">
+                        <a href="./login.html">login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+</html>
