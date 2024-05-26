@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동아리가입</title>
+    <link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+    <!-- <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet" type='text/css'>
+    <link rel="stylesheet" href="apply.css">
+
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-12" id="application">
+            <form onsubmit="return show_order()">
+                <h1> 동아리 가입 신청하기 </h1>
+
+                <fieldset>
+
+                    <legend><span class="number">1</span> Profile</legend>
+
+                    <label for="clubNameInput" id="auto-conatiner">동아리:</label>
+                    <input type="search" id="clubNameInput" oninput="fetchClubNames()" name="clubname">
+                    <div id="suggestions"></div>
+
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="user_name">
+
+                    <label for="studentID">학번:</label>
+                    <input type="number" id="studentID" name="user_studentID">
+
+                    <label for="grade">학년:</label>
+                        <input type="radio" id="1st" value="1st" name="grade"><label for="1st" class="light">1학년</label><br>
+                        <input type="radio" id="2nd" value="2nd" name="grade"><label for="2nd" class="light">2학년</label><br>
+                        <input type="radio" id="3rd" value="3rd" name="grade"><label for="3rd" class="light">3학년</label><br>
+                        <input type="radio" id="4th" value="4th" name="grade"><label for="4th" class="light">4학년</label><br>
+                        <input type="radio" id="5th" value="5th" name="grade"><label for="5th" class="light">5학년 이상</label><br>
+                    <br>
+
+                    <label for="department">학과:</label>
+                    <input type="text" id="department" name="department">
+
+                    <label for="phonenum">전화번호:</label>
+                    <input type="number" id="phonenum" name="phonenum">
+
+                    <label for="email">이메일:</label>
+                    <input type="email" id="email" name="email">
+
+                </fieldset>
+                <fieldset>
+
+                    <legend><span class="number">2</span> For club</legend>
+
+                    <label for="bio">동아리에 가입하고 싶은 이유:</label>
+                    <textarea id="bio" name="user_bio"></textarea>
+
+                    <label for="act">하고 싶은 활동:</label>
+                    <textarea id="act" name="user_act"></textarea>
+
+
+                    <!-- <label for="job">Job Role:</label>
+                    <select id="job" name="user_job">
+                        <optgroup label="Web">
+                            <option value="frontend_developer">Front-End Developer</option>
+                            <option value="php_developer">PHP Developer</option>
+                            <option value="python_developer">Python Developer</option>
+                            <option value="rails_developer">Rails Developer</option>
+                            <option value="web_designer">Web Designer</option>
+                            <option value="wordpress_developer">Wordpress Developer</option>
+                        </optgroup>
+                        <optgroup label="Mobile">
+                            <option value="android_developer">Android Developer</option>
+                            <option value="ios_developer">IOS Developer</option>
+                            <option value="mobile_designer">Mobile Designer</option>
+                        </optgroup>
+                        <optgroup label="Business">
+                            <option value="business_owner">Business Owner</option>
+                            <option value="freelancer">Freelancer</option>
+                        </optgroup>
+                    </select> -->
+
+                    <!-- <label>Interests:</label>
+                    <input type="checkbox" id="development" value="interest_development" name="user_interest"><label class="light" for="development">Development</label><br>
+                    <input type="checkbox" id="design" value="interest_design" name="user_interest"><label class="light" for="design">Design</label><br>
+                    <input type="checkbox" id="business" value="interest_business" name="user_interest"><label class="light" for="business">Business</label>
+                    -->
+                </fieldset>
+
+                <button onclick="show_order()" type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="apply_client.js"></script>
+
+</body>
+
+</html>
