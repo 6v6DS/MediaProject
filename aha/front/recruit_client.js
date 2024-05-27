@@ -9,11 +9,11 @@
         blog.posts = {};
         blog.tab = 'blog';
 
-        $http.get('/new')
+        $http.get('/recruit')
             .then(function (response) {
                 blog.posts = response.data;
                 blog.posts.forEach(function(post) {
-                    $http.get('/comments/' + post.id)
+                    $http.get('/recomment/' + post.id)
                         .then(function (response) {
                             post.comments = response.data;
                         })
@@ -43,11 +43,11 @@
                 body: blog.post.body.join('\n'),
                 image: blog.post.image,
                 author: blog.post.author,
-                createdOn: Date.now(),
+                written: Date.now(),
                 likes: 0,
             };
         
-            $http.post('/new', postData)
+            $http.post('/recruit', postData)
                 .then(function (response) {
                     alert('게시물이 추가되었습니다.');
                     blog.posts.unshift(blog.post);
@@ -59,9 +59,6 @@
                     alert("글 추가에 실패했습니다");
                 });
         };
-        
-
-
 
     }]);
 
@@ -73,15 +70,18 @@
 
         commentCtrl.addComment = function(post){
             var newComment = {
-                postId: post.id,
+                recruit_id: post.id,
                 body: commentCtrl.comment.body,
                 author: commentCtrl.comment.author,
-                createdOn: Date.now()
+                written: Date.now()
             };
 
-            $http.post('/comments', newComment)
+            $http.post('/recomment', newComment)
                 .then(function (response) {
                     alert('댓글이 추가되었습니다.');
+                    if (!post.comments) {
+                        post.comments = [];
+                    }
                     post.comments.push(response.data);
                     commentCtrl.comment = {};
                 })
@@ -91,5 +91,19 @@
                 });
         };
     }]);
+
+
+    // AngularJS 내에서 좋아요 버튼 클릭 처리
+    blog.likePost = function(post) {
+        $http.post('/recruit/' + post.id + '/like')
+            .then(function(response) {
+                post.likes = response.data.likes;
+                alert('좋아요가 추가되었습니다.');
+            })
+            .catch(function(error) {
+                console.error("좋아요 추가 실패:", error);
+            });
+        };
+
 
 })();

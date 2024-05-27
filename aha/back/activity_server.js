@@ -38,7 +38,8 @@ app.get('/activity', async (req, res) => {
 app.post('/activity', async(req, res) => {
     const { title, body, image, clubname } = req.body;
     try {
-        const newActivity = await pool.query('INSERT INTO activity (title, body, image, clubname) VALUES ($1, $2, $3, $4) RETURNING *', 
+        const newActivity = await pool.query(
+            'INSERT INTO activity (title, body, image, clubname) VALUES ($1, $2, $3, $4) RETURNING *', 
             [title, body, image, clubname]);
         res.status(201).json(newActivity.rows[0]);
     } catch (err) {
@@ -47,7 +48,7 @@ app.post('/activity', async(req, res) => {
     }
 });
 
-// 코멘트 보기
+// 활동내역 코멘트 보기
 app.get('/activity/:id', async (req, res) => {
     try {
         const activity = await pool.query('SELECT * FROM activity WHERE id = $1', [req.params.id]);
@@ -62,7 +63,8 @@ app.get('/activity/:id', async (req, res) => {
 app.post('/actcomment', async (req, res) => {
     const { activity_id, body, author } = req.body;
     try {
-        const newComment = await pool.query('INSERT INTO actcomment (activity_id, body, author) VALUES ($1, $2, $3) RETURNING *', 
+        const newComment = await pool.query(
+            'INSERT INTO actcomment (activity_id, body, author) VALUES ($1, $2, $3) RETURNING *', 
             [activity_id, body, author]);
         res.status(201).json(newComment.rows[0]);
     } catch (err) {

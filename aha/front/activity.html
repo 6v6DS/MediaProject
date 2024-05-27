@@ -116,7 +116,7 @@
                                         <input type="text" ng-model="commentCtrl.comment.author" required
                                             placeholder="Name" />
 
-                                        <input type="submit" id="btn_comment" value="추가하기" />
+                                        <input type="submit" id="btn_comment" value="입력" />
                                     </form>
                                 </div>
                             </div>
@@ -130,13 +130,13 @@
                                 <h4>제목</h4>
                                 <input type="text" ng-model="blog.post.title" />
                                 <h4>활동내역</h4>
-                                <textarea ng-model="blog.post.body" ng-list="/\n/" rows="10"></textarea>
+                                <textarea ng-model="blog.post.body" ng-list="/\n/" rows="10" placeholder="진행한 동아리 활동에 대해 작성해주세요."></textarea>
                                 <label for="">이미지 URL</label>
-                                <input type="text" ng-model="blog.post.image" placeholder="http://.com" />
+                                <input type="text" ng-model="blog.post.image" placeholder="url" />
                                 <label for="">작성자:</label>
                                 <input type="text" ng-model="blog.post.clubname" placeholder="Club Name" required />
 
-                                <input type="submit" id="btn" value="추가하기" />
+                                <input type="submit" id="btn" value="게시" />
                                 </select>
                             </form>
 

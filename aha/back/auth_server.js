@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { Pool } = require('pg');
 const path = require('path');
 const cors = require('cors');
-const { Pool } = require('pg');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;    // PW hashing을 위한 salt 값
@@ -12,8 +12,8 @@ const port = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'front')));
+app.use(cors());
 
 // DB(PostgreSQL) connection
 const pool = new Pool({

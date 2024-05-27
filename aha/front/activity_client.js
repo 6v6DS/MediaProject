@@ -9,7 +9,6 @@
         blog.posts = {};
         blog.tab = 'blog';
 
-        //여기에서, data 받아오고 넣어주세요 데이터..
         $http.get('/activity')
             .then(function (response) {
                 blog.posts = response.data;
@@ -44,7 +43,7 @@
                 body: blog.post.body.join('\n'),
                 image: blog.post.image,
                 clubname: blog.post.clubname,
-                createdOn: Date.now()
+                written: Date.now()
             };
             
             console.log(postData);
@@ -74,20 +73,20 @@
 
         commentCtrl.addComment = function(post){
             var newComment = {
-                postId: post.id,
+                activity_id: post.id,
                 body: commentCtrl.comment.body,
                 author: commentCtrl.comment.author,
-                createdOn: Date.now()
+                written: Date.now()
             };
 
             $http.post('/actcomment', newComment)
                 .then(function (response) {
                     alert('댓글이 추가되었습니다.');
                     if (!post.comments) {
-                        post.comments = []; // 만약 comments 배열이 초기화되지 않았다면 초기화
+                        post.comments = [];
                     }
                     post.comments.push(response.data);
-                    commentCtrl.comment = {}; // 입력 폼 초기화
+                    commentCtrl.comment = {};
                 })
                 .catch(function (error) {
                     console.error("Error:", error);

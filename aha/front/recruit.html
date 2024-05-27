@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>신규 동아리 모집</title>
-    <link rel="stylesheet" href="./new.css">
+    <link rel="stylesheet" href="./recruit.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -31,10 +31,20 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/110131/jquery-2.1.0.min.js"
         type="text/javascript"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/110131/responsive.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#header").load("./header.html");
+        });
+        $(document).ready(function(){
+            $("#footer").load("./footer.html");
+        });
+    </script>
+
 </head>
 
 <body>
-    
+    <div id="header"></div>
     <body ng-app="blogApp">
         <div ng-controller="BlogController as blog">
             <!-- 상단바 -->
@@ -81,7 +91,7 @@
 
                                 <h2>{{post.title}}</h2>
                                 <img src="{{post.image}}" ng-show="{{post.image}}" />
-                                <cite>by {{post.author}} on {{post.createdOn | date}}</cite>
+                                <cite>by {{post.author}} on {{post.written | date}}</cite>
                                 <div class="post-body">
                                     <p ng-repeat="paragraph in post.body">
                                         {{paragraph}}
@@ -109,7 +119,7 @@
                                         <input type="text" ng-model="commentCtrl.comment.author" required
                                             placeholder="Name" />
 
-                                        <input type="submit" id="btn_comment" value="추가하기" />
+                                        <input type="submit" id="btn_comment" value="입력" />
                                     </form>
                                 </div>
                             </div>
@@ -123,13 +133,13 @@
                                 <h4>제목</h4>
                                 <input type="text" ng-model="blog.post.title" />
                                 <h4>설명</h4>
-                                <textarea ng-model="blog.post.body" ng-list="/\n/" rows="10" placeholder="모집하고 싶은 동아리 관련 설명을 작성해주세요."></textarea>
+                                <textarea ng-model="blog.post.body" ng-list="/\n/" rows="10" placeholder="개설을 원하는 신규 동아리 관련 설명을 작성해주세요."></textarea>
                                 <label for="">이미지 URL</label>
-                                <input type="text" ng-model="blog.post.image" placeholder="http://.com" />
+                                <input type="text" ng-model="blog.post.image" placeholder="url" />
                                 <label for="">작성자:</label>
                                 <input type="text" ng-model="blog.post.author" placeholder="Author Name" required />
 
-                                <input type="submit" id="btn" value="추가하기" />
+                                <input type="submit" id="btn" value="게시" />
                                 </select>
                             </form>
 
@@ -144,8 +154,8 @@
 
     </body>
 
-
-    <script src="new_client.js"></script>
+    <div id="footer"></div>
+    <script src="./recruit_client.js"></script>
 </body>
 
 </html>

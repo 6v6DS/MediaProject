@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 const { Pool } = require('pg');
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -9,8 +9,8 @@ const port = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'front')));
+app.use(cors());
 
 // DB(PostgreSQL) connection
 const pool = new Pool({

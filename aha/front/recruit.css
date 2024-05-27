@@ -12,10 +12,11 @@ html {
 }
 
 .topbar {
+    margin-top: 60px;
     background: #79b9d2;
     color: white;
     width: 100%;
-    z-index: 9999;
+    
     padding: 5px 20px;
 }
 
