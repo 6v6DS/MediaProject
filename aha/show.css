@@ -1,0 +1,510 @@
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Gowun Dodum', "Sofia", sans-serif;
+}
+
+.mytitle {
+  width: 100%;
+  height: 280px;
+
+  background-color: #79b9d2;
+  background-position: center;
+  background-size: cover;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.mytitle>button {
+  width: 200px;
+  height: 50px;
+
+  background-color: transparent;
+  color: white;
+
+  border-radius: 50px;
+  border: 1px solid white;
+
+  margin-top: 10px;
+}
+
+.mytitle>button:hover { 
+  border: 2px solid white;
+}
+
+.mypost {
+width: 95%;
+max-width: 500px;
+margin: 20px auto 0px auto;
+padding: 20px;
+box-shadow: 0px 0px 3px 0px gray;
+
+display: none;
+}
+
+.mybtns {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+
+margin-top: 20px;
+}
+
+.mybtns>button {
+margin-right: 10px;
+}
+
+
+.h1-title{
+  margin-top: 30px;
+}
+
+h2 {
+  color: #0a4870;
+  font-weight: 500;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* 카드들을 가운데 정렬합니다. */
+}
+
+ul .booking-card {
+  position: relative;
+  width: calc(25% - 40px); /* 각 카드의 너비를 조정합니다. 여백을 고려하여 계산합니다. */
+  margin: 20px;
+  margin-bottom: 30px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-position: center center;
+  background-size: cover;
+  text-align: center;
+  color: #0a4870;
+  transition: 0.3s;
+}
+ul .booking-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 72, 112, 0);
+  transition: 0.3s;
+}
+ul .booking-card .book-container {
+  height: 200px;
+}
+ul .booking-card .book-container .content {
+  position: relative;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  transform: translateY(-200px);
+  transition: 0.3s;
+}
+ul .booking-card .book-container .content .btn {
+  border: 3px solid white;
+  padding: 10px 15px;
+  background: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.3em;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+ul .booking-card .book-container .content .btn:hover {
+  background: white;
+  border: 0px solid white;
+  color: #0a4870;
+}
+ul .booking-card .informations-container {
+  flex: 1 0 auto;
+  padding: 20px;
+  background: #f0f0f0;
+  transform: translateY(206px);
+  transition: 0.3s;
+  cursor: pointer;
+}
+ul .booking-card .informations-container .title {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+ul .booking-card .informations-container .title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  width: 50px;
+  margin: auto;
+  background: #0a4870;
+}
+ul .booking-card .informations-container .price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+ul .booking-card .informations-container .price .icon {
+  margin-right: 10px;
+}
+ul .booking-card .informations-container .more-information {
+  opacity: 0;
+  transition: 0.3s;
+}
+ul .booking-card .informations-container .more-information .info-and-date-container {
+  display: flex;
+}
+ul .booking-card .informations-container .more-information .info-and-date-container .box {
+  flex: 1 0;
+  padding: 15px;
+  margin-top: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background: white;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+ul .booking-card .informations-container .more-information .info-and-date-container .box .icon {
+  margin-bottom: 5px;
+}
+ul .booking-card .informations-container .more-information .info-and-date-container .box.info {
+  color: #ec992c;
+  margin-right: 10px;
+}
+ul .booking-card .informations-container .more-information .disclaimer {
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: #7d7d7d;
+}
+ul .booking-card:hover::before {
+  background: rgba(10, 72, 112, 0.6);
+}
+ul .booking-card:hover .book-container .content {
+  opacity: 1;
+  transform: translateY(0px);
+}
+ul .booking-card:hover .informations-container {
+  transform: translateY(0px);
+}
+ul .booking-card:hover .informations-container .more-information {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  ul .booking-card::before {
+    background: rgba(10, 72, 112, 0.6);
+  }
+  ul .booking-card .book-container .content {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  ul .booking-card .informations-container {
+    transform: translateY(0px);
+  }
+  ul .booking-card .informations-container .more-information {
+    opacity: 1;
+  }
+}
+.credits {
+  display: table;
+  background: #0a4870;
+  color: white;
+  line-height: 25px;
+  margin: 10px auto;
+  padding: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+.credits a {
+  color: #e3ebf1;
+}
+
+h1 {
+  margin: 10px 20px;
+}
+
+
+/* 모달들 시작 */
+* {
+box-sizing: border-box;
+font-size: 14px;
+}
+
+::selection {
+background-color: white;
+}
+
+i {
+font-size: 20px;
+}
+
+
+/* 카드 눌렀을 때 뒷배경 및 위치 */
+.lightbox-blanket {
+display: none;
+background-color: rgba(30, 30, 30, 0.9);
+display: block;
+height: 100vh;
+position: fixed;
+overflow-y: scroll;
+top: 0;
+width: 100vw;
+z-index: 20;
+}
+
+/* 카드 눌렀을 때 위치 */
+.pop-up-container {
+display: none;
+height: 100%;
+width: auto;
+display: table;
+margin: auto;
+position: static;
+}
+
+@media (max-width: 400px) {
+.pop-up-container {
+  width: 96%;
+  margin: 2%;
+}
+}
+
+/* 카드 눌렀을때 위치 가운데로 고정해주는거 */
+.pop-up-container-vertical {
+height: 100%;
+vertical-align: middle;
+display: table-cell;
+}
+
+/* 이거 버튼 위치랑 박스 쉐도우 */
+.pop-up-wrapper {
+-webkit-box-shadow: -45px 49px 83px 1px rgba(0, 0, 0, 0.45);
+-moz-box-shadow: -45px 49px 83px 1px rgba(0, 0, 0, 0.45);
+box-shadow: -45px 49px 83px 1px rgba(0, 0, 0, 0.45);
+display: block;
+margin: 20px auto;
+width: auto;
+position: relative;
+}
+
+/* 팝업 뒷배경 */
+.pop-up-wrapper {
+background-color: white;
+display: block;
+padding: 50px;
+}
+
+/* 뒤로가기 버튼 */
+.go-back {
+cursor: pointer;
+position: absolute;
+left: 10px;
+top: 10px;
+color: #222;
+width: 0;
+height: 0;
+border-top: 60px solid #79b9d2;
+border-right: 60px solid transparent;
+}
+
+.go-back i {
+font-size: 20px;
+position: relative;
+top: -52px;
+left: 10px;
+}
+
+/* 팝업 상세정보 */
+.product-details {
+max-width: 600px;
+}
+
+/* 팝업 왼쪽 사항들 */
+.product-left {
+display: inline-block;
+padding-right: 4%;
+vertical-align: top;
+width: 46%;
+}
+
+/* 팝업 오른쪽 사항들 */
+.product-right {
+display: inline-block;
+vertical-align: top;
+width: 49%;
+}
+
+/* 팝업 밑에 가격이랑 카트담기 */
+.product-bottom {
+border-top: 1px solid #ccc;
+position: relative;
+padding-top: 20px;
+}
+
+@media (max-width: 650px) {
+.product-left,
+.product-right,
+.product-bottom {
+  width: 100%;
+}
+.product-left {
+  padding-right: 0;
+}
+.product-info {
+  display: inline-block;
+  width: 60%;
+  vertical-align: top;
+}
+.product-image {
+  display: inline-block;
+  width: 39%;
+  vertical-align: top;
+}
+}
+
+@media (max-width: 512px) {
+.product-info,
+.product-image {
+  width: 100%;
+}
+}
+
+/* 팝업 크기 살짝 조정 */
+.product-manufacturer {
+color: #222;
+font-size: 50px;
+font-weight: bold;
+line-height: 1;
+margin: -2px;
+}
+
+/* 팝업 글씨 */
+.product-title {
+margin-top: 10px;
+font-size: 20px;
+color: #888;
+}
+
+/* 팝업 가격 */
+.product-price {
+  margin-top: 10px;
+color: #222;
+font-size: 24px;
+letter-spacing: 1px;
+}
+
+/* 가격에 밑줄 */
+.product-price-cents {
+text-decoration: underline;
+vertical-align: top;
+padding-left: 3px;
+}
+
+/* 이미지 조정 */
+.product-image {
+padding: 10px 10px 0 10px;
+}
+
+/* 이미지 조정 */
+.product-image img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+height: 295px;
+}
+
+/* 이 밑에 다 그거 팝업  */
+.product-description {
+line-height: 1.5;
+}
+
+.product-available {
+margin-top: 25px;
+}
+
+.product-rating {
+margin-top: 25px;
+}
+
+
+.product-rating-details {
+display: inline-block;
+padding-left: 10px;
+}
+
+@media (max-width: 515px) {
+.product-rating-details {
+  padding-left: 0;
+}
+}
+
+.product-extended {
+color: #235ba8;
+padding-left: 5px;
+}
+.product-quantity {
+margin-top: 25px;
+margin-bottom: 25px;
+}
+
+
+/* 대문자로 해주는거 여기 밑에 다 quantity 관련된거라 */
+.product-quantity-label {
+text-transform: uppercase;
+}
+
+/* 7. Trumps - text helpers, often !important */
+
+.hidden {
+display: none;
+}
+
+.btn-popup {
+  background-color: #79b9d2; /* 초록색 */
+  color:#79b9d2;
+}
+
+.btn-popup:hover {
+  background-color: #79b9d2; /* 어두운 초록색 */
+} 
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: white; /* 모달 배경과 동일하게 */
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}
