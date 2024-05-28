@@ -10,9 +10,8 @@ $(document).ready(function () {
     });
 });
 
-let cards = [];
-
 //fetch
+let cards = [];
 function listing() {
     fetch('/club').then((res) => res.json()).then((data) => {
         let rows = data['result'];
@@ -27,22 +26,23 @@ function listing() {
             let sns = a['sns'];
             let description = a['description'];
             let image = a['image'];
-            let temp_html = `<div class="col">
-                                <div class="card h-100" onclick="OpenProduct(${index})">
-                                    <img src="${image}" class="card-img-top">
-                                    <div class="card-body">
-                                        <h5 class="card-title">${clubname}</h5>
-                                        <p class="card-text">${subfield}</p>
-                                    </div>
-                                </div>
-                            </div>`;
+            let temp_html = `
+                <div class="col">
+                    <div class="card h-100" onclick="OpenProduct(${index})">
+                        <img src="${image}" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">${clubname}</h5>
+                            <p class="card-text"># ${subfield}</p>
+                        </div>
+                    </div>
+                </div>`;
             $('#cards-box').append(temp_html);
             cards.push({ division, clubname, category, subfield, location, contact, sns, description, image });
         });
     });
 }
 
-// Go Back
+// 모달창
 function OpenProduct(index) {
     $(".lightbox-blanket").toggle();
 
@@ -58,33 +58,33 @@ function OpenProduct(index) {
     $('#modal-image').attr('src', card.image);
 }
 
-function posting() {
-    //comment 데이터 가져오기
-    let clubname = $('#clubname').val();
-    let category = $('#category').val();
-    let subfield = $('#subfield').val();
-    let location = $('#location').val();
-    let contact = $('#contact').val();
-    let sns = $('#sns').val();
-    let description = $('#description').val();
-    let image = $('#image').val();
+// function posting() {
+//     //comment 데이터 가져오기
+//     let clubname = $('#clubname').val();
+//     let category = $('#category').val();
+//     let subfield = $('#subfield').val();
+//     let location = $('#location').val();
+//     let contact = $('#contact').val();
+//     let sns = $('#sns').val();
+//     let description = $('#description').val();
+//     let image = $('#image').val();
 
-    //form 데이터에 태워서 보내주기
-    let formData = new FormData();
-    formData.append("clubname", clubname);
-    formData.append("category", category);
-    formData.append("subfield", subfield);
-    formData.append("location", location);
-    formData.append("contact", contact);
-    formData.append("sns", sns);
-    formData.append("description", description);
-    formData.append("image", image);
+//     //form 데이터에 태워서 보내주기
+//     let formData = new FormData();
+//     formData.append("clubname", clubname);
+//     formData.append("category", category);
+//     formData.append("subfield", subfield);
+//     formData.append("location", location);
+//     formData.append("contact", contact);
+//     formData.append("sns", sns);
+//     formData.append("description", description);
+//     formData.append("image", image);
 
-    fetch('/club', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
-        alert(data['msg'])
-        window.location.reload()
-    })
-}
+//     fetch('/club', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+//         alert(data['msg'])
+//         window.location.reload()
+//     })
+// }
 
 //검색창 열고닫고
 function open_box() {
@@ -133,10 +133,8 @@ function GoBack() {
 
 //모달 제출 버튼
 function submitForm() {
-    // 여기에 제출 버튼 클릭 시 수행할 작업을 추가하세요.
     console.log("동아리신청");
     alert("동아리 신청 창으로 이동합니다.");
-    
     window.location.href = "./apply.html";
 }
 

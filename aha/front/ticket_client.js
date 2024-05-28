@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 
 function show_submit() {
-    fetch('/application').then((res) => res.json()).then((data) => {
+    fetch('/ticket').then((res) => res.json()).then((data) => {
         let rows = data['result']
         $('#info').empty()
         rows.forEach((a) => {
@@ -50,14 +50,14 @@ function show_order() {
     formData.append("etc_give", etc)
 
     // Post
-    fetch('/application', {
+    fetch('/ticket', {
         method: "POST",
         body: formData
     })
         .then((res) => res.json())
         .then((data) => {
             alert('예매가 완료되었습니다');
-            window.location.href = "./show2.html";
+            window.location.href = "./show.html";
         })
         .catch((error) => {
             console.error('Error:', error);

@@ -24,53 +24,46 @@ const pool = new Pool({
 
 // Routing
 
-// Fetch all shows
-app.get('/shows', async (req, res) => {
+// 공연/행사 정보
+app.get('/show', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM shows ORDER BY date DESC');
+        const result = await pool.query('SELECT * FROM show ORDER BY date DESC');
         res.json({ result: result.rows });
     } catch (error) {
-        console.error('Error fetching shows:', error);
-        res.status(500).json({ message: 'Error fetching shows' });
+        console.error(error);
+        res.status(500).send({ error: 'Error fetching show informations' });
     }
 });
 
-// Post a new show
-app.post('/shows', async (req, res) => {
-    const { title, date, time, location, price, description, posterUrl } = req.body;
+// 새로운 공연/행사 등록
+app.post('/show', async(req, res) => {
+    const { title, clubname, date, time, location, price, description, poster } = req.body;
     try {
-        const query = 'INSERT INTO shows (title, date, time, location, price, description, poster) VALUES ($1, $2, $3, $4, $5, $6, $7)';
-        await pool.query(query, [title, date, time, location, price, description, posterUrl]);
-        res.status(201).json({ message: 'Show uploaded successfully' });
+        const result = await pool.query(
+            'INSERT INTO show (title, clubname, date, time, location, price, description, poster) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', 
+            [title, clubname, date, time, location, price, description, poster]);
+        res.json({ success: true, message: 'Show uploaded successfully', data: result });
     } catch (error) {
-        console.error('Error uploading show:', error);
-        res.status(500).json({ message: 'Error uploading show' });
+        console.error(error);
+        res.status(500).send({ error: 'Error uploading show' });
     }
 });
 
-// Fetch all applications
-app.get('/application', async (req, res) => {
+// 참가 신청
+app.post('/ticket', async(req, res) => {
+    const { count, name, studentid, department, phonenum, etc } = req.body;
     try {
-        const result = await pool.query('SELECT * FROM applications ORDER BY date DESC');
-        res.json({ result: result.rows });
+        const query = await pool.query(
+            'INSERT INTO ticket (count, name, studentid, department, phonenum, etc) VALUES ($1, $2, $3, $4, $5, $6)', 
+            [count, name, studentid, department, phonenum, etc]);
+        res.json({ success: true, message: 'Ticketing successfully' });
     } catch (error) {
-        console.error('Error fetching applications:', error);
-        res.status(500).json({ message: 'Error fetching applications' });
+        console.error(error);
+        res.status(500).send({ error: 'Error ticketing' });
     }
 });
 
-// Submit an application
-app.post('/application', async (req, res) => {
-    const { count, name, student_ID, major, phoneNumber, etc } = req.body;
-    try {
-        const query = 'INSERT INTO applications (count, name, student_ID, major, phoneNumber, etc) VALUES ($1, $2, $3, $4, $5, $6)';
-        await pool.query(query, [count, name, student_ID, major, phoneNumber, etc]);
-        res.status(201).json({ message: 'Application submitted successfully' });
-    } catch (error) {
-        console.error('Error submitting application:', error);
-        res.status(500).json({ message: 'Error submitting application' });
-    }
-});
+
 // Start Server
 app.listen(port, () => {
     console.log(`Connected, ${port} port ...`);

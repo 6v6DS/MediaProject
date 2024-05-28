@@ -28,11 +28,11 @@ const pool = new Pool({
 app.get('/club', async(req, res) => {
     try {
         const result = await pool.query('SELECT * FROM club');
-        const modifiedRows = result.rows.map(row => {
+        const img = result.rows.map(row => {
             row.image = getRandomImage();
             return row;
         });
-        res.json({ result: modifiedRows });
+        res.json({ result: img });
     } catch (err) {
         console.error(err);
         res.status(500).send('Error fetching clubs');

@@ -27,7 +27,7 @@ const pool = new Pool({
 // 모든 게시물 조회
 app.get('/recruit', async(req, res) => {
     try {
-        const results = await pool.query('SELECT * FROM recruit');
+        const results = await pool.query('SELECT * FROM recruit ORDER BY written DESC');
         res.status(200).json(results.rows);
     } catch (err) {
         res.status(500).send(err.message);

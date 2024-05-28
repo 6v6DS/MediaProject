@@ -24,7 +24,7 @@ const pool = new Pool({
 
 // Routing
 
-// 동아리 불러오기
+// 동아리 불러오기 - 자동완성
 app.get('/club', async(req, res) => {
     const clubName = req.query.clubName || '';
     try {
@@ -33,21 +33,21 @@ app.get('/club', async(req, res) => {
         res.json(result.rows);
     } catch (err) {
         console.error(err);
-        res.status(500).send({ error: 'Database query failed' });
+        res.status(500).send({ error: 'Error fetching club names' });
     }
 });
 
-// 가입 신청 제출
+// 가입 신청
 app.post('/apply', async(req, res) => {
     const { clubname, name, studentid, grade, department, phonenum, email, qa1, qa2 } = req.body;
     try {
         const result = await pool.query(
             'INSERT INTO apply (clubname, name, studentid, grade, department, phonenum, email, qa1, qa2) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
             [clubname, name, studentid, grade, department, phonenum, email, qa1, qa2]);
-        res.json({ success: true, message: "가입 신청 완료" });
+        res.json({ success: true, message: "Application submitted successfully" });
     } catch (err) {
         console.error(err);
-        res.status(500).send({ error: 'Database query failed' });
+        res.status(500).send({ error: 'Error submitting application' });
     }
 });
 
