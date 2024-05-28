@@ -31,88 +31,80 @@ function show_submit() {
 
 
 function show_order() {
-    event.preventDefault();
+    event.preventDefault(); // 폼 제출 기본 이벤트 방지
 
-    //Get
-    let count = $('#count').val()
-    let name = $('#name').val()
-    let student_ID = $('#student_ID').val()
-    let major = $('#major').val()
-    let phoneNumber = $('#phoneNumber').val()
-    let etc = $('#etc').val()
+    var formData = {
+        count: $('#count').val(),
+        name: $('#name').val(),
+        studentid: $('#student_ID').val(),
+        department: $('#major').val(),
+        phonenum: $('#phoneNumber').val(),
+        etc: $('#etc').val()
+    };
 
-    let formData = new FormData();
-    formData.append("count_give", count)
-    formData.append("name_give", name)
-    formData.append("student_ID_give", student_ID)
-    formData.append("major_give", major)
-    formData.append("phoneNumber_give", phoneNumber)
-    formData.append("etc_give", etc)
-
-    // Post
-    fetch('/ticket', {
-        method: "POST",
-        body: formData
-    })
-        .then((res) => res.json())
-        .then((data) => {
+    $.ajax({
+        url: '/ticket',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(response) {
             alert('예매가 완료되었습니다');
             window.location.href = "./show.html";
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-    return false;
+        },
+        error: function(xhr, status, error) {
+            console.error('예매 실패:', error);
+        }
+    });
 }
 
 
+
 // Custom Select
-$('select').each(function () {
-    var $this = $(this), numberOfOptions = $(this).children('option').length;
+// $('select').each(function () {
+//     var $this = $(this), numberOfOptions = $(this).children('option').length;
 
-    $this.addClass('select-hidden');
-    $this.wrap('<div class="select"></div>');
-    $this.after('<div class="select-styled"></div>');
+//     $this.addClass('select-hidden');
+//     $this.wrap('<div class="select"></div>');
+//     $this.after('<div class="select-styled"></div>');
 
-    var $styledSelect = $this.next('div.select-styled');
-    $styledSelect.text($this.children('option').eq(0).text());
+//     var $styledSelect = $this.next('div.select-styled');
+//     $styledSelect.text($this.children('option').eq(0).text());
 
-    var $list = $('<ul />', {
-        'class': 'select-options'
-    }).insertAfter($styledSelect);
+//     var $list = $('<ul />', {
+//         'class': 'select-options'
+//     }).insertAfter($styledSelect);
 
-    for (var i = 0; i < numberOfOptions; i++) {
-        $('<li />', {
-            text: $this.children('option').eq(i).text(),
-            rel: $this.children('option').eq(i).val()
-        }).appendTo($list);
-    }
+//     for (var i = 0; i < numberOfOptions; i++) {
+//         $('<li />', {
+//             text: $this.children('option').eq(i).text(),
+//             rel: $this.children('option').eq(i).val()
+//         }).appendTo($list);
+//     }
 
-    var $listItems = $list.children('li');
+//     var $listItems = $list.children('li');
 
-    $styledSelect.click(function (e) {
-        e.stopPropagation();
-        $('div.select-styled.active').not(this).each(function () {
-            $(this).removeClass('active').next('ul.select-options').hide();
-        });
-        $(this).toggleClass('active').next('ul.select-options').toggle();
-    });
+//     $styledSelect.click(function (e) {
+//         e.stopPropagation();
+//         $('div.select-styled.active').not(this).each(function () {
+//             $(this).removeClass('active').next('ul.select-options').hide();
+//         });
+//         $(this).toggleClass('active').next('ul.select-options').toggle();
+//     });
 
-    $listItems.click(function (e) {
-        e.stopPropagation();
-        $styledSelect.text($(this).text()).removeClass('active');
-        $this.val($(this).attr('rel'));
-        $list.hide();
-        console.log($this.val());
-    });
+//     $listItems.click(function (e) {
+//         e.stopPropagation();
+//         $styledSelect.text($(this).text()).removeClass('active');
+//         $this.val($(this).attr('rel'));
+//         $list.hide();
+//         console.log($this.val());
+//     });
 
-    $(document).click(function () {
-        $styledSelect.removeClass('active');
-        $list.hide();
-    });
+//     $(document).click(function () {
+//         $styledSelect.removeClass('active');
+//         $list.hide();
+//     });
 
-});
+// });
 
 $(function () {
     $('.quick-reservation').hide();
