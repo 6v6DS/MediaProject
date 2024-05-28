@@ -92,14 +92,17 @@
                                 <h2>{{post.title}}</h2>
                                 <img src="{{post.image}}" ng-show="{{post.image}}" />
                                 <cite>by {{post.author}} on {{post.written | date}}</cite>
+                                <br>
+                                <br>
                                 <div class="post-body">
-                                    <p ng-repeat="paragraph in post.body">
-                                        {{paragraph}}
-                                    </p>
+                                    <p>{{post.body}}</p>
                                 </div>
-
+                                
                                 <div class="comments" ng-controller="CommentController as commentCtrl">
-                                    <button class="fa fa-heart" ng-click="post.likes = post.likes+1"> {{post.likes}}</button>
+                                    <div class="button-container">
+                                        <button class="fa fa-heart" ng-click="blog.incrementLikes(post)"> {{post.likes}}</button>
+                                    </div>
+                                    <br>
                                     <br>
                                     <h3>코멘트</h3>
                                     <ul>
@@ -110,7 +113,7 @@
                                     </ul>
                                     <form name="commentForm"
                                         ng-submit="commentForm.$valid && commentCtrl.addComment(post)" novalidate>
-
+                                        <br>
                                         <br>
                                         <h4>코멘트 추가하기</h4>
                                         <textarea ng-model="commentCtrl.comment.body" cols="20" rows="10"

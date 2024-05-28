@@ -24,7 +24,7 @@ const pool = new Pool({
 
 // Routing
 
-// 신규 동아리
+// 모든 게시물 조회
 app.get('/recruit', async(req, res) => {
     try {
         const results = await pool.query('SELECT * FROM recruit');
@@ -33,6 +33,8 @@ app.get('/recruit', async(req, res) => {
         res.status(500).send(err.message);
     }
 });
+
+// 신규 동아리 게시물 추가
 app.post('/recruit', async(req, res) => {
     const { title, body, image, author } = req.body;
     try {
@@ -46,18 +48,29 @@ app.post('/recruit', async(req, res) => {
     }
 });
 
-// 신규 동아리 코멘트
+// 신규 동아리 게시물 보기
 app.get('/recruit/:id', async(req, res) => {
     try {
-        const recruit = await pool.query('SELECT * FROM recruit WHERE id = $1', [req.params.id]);
-        const comments = await pool.query('SELECT * FROM recomment WHERE recruit_id = $1', [req.params.id]);
-        res.status(200).json({ recruit: recruit.rows[0], comments: comments.rows });
+        const recruits = await pool.query(
+            'SELECT * FROM recruit WHERE id = $1',
+            [req.params.id]);
+        const comments = await pool.query(
+            'SELECT * FROM recomment WHERE recruit_id = $1', 
+            [req.params.id]);
+
+        res.status(200).json({
+            recruits: recruits.rows[0],
+            comments: comments.rows
+        });
     } catch (err) {
         res.status(500).send(err.message);
     }
 });
-app.post('/recomment', async(req, res) => {
-    const { recruit_id, body, author } = req.body;
+
+// 신규 동아리 댓글
+app.post('/recruit/:id/recomment', async(req, res) => {
+    const { body, author } = req.body;
+    const recruit_id = req.params.id;
     try {
         const newComment = await pool.query(
             'INSERT INTO recomment (recruit_id, body, author) VALUES ($1, $2, $3) RETURNING *', 
@@ -68,21 +81,17 @@ app.post('/recomment', async(req, res) => {
         res.status(500).send(err.message);
     }
 });
-// 좋아요 수
+
+// 신규 동아리 좋아요
 app.post('/recruit/:id/like', async (req, res) => {
     try {
-        const { id } = req.params;
-        const updateLikes = await pool.query(
+        const id = req.params.id;
+        const result = await pool.query(
             'UPDATE recruit SET likes = likes + 1 WHERE id = $1 RETURNING likes',
-            [id]
-        );
-        if (updateLikes.rows.length > 0) {
-            res.status(200).json(updateLikes.rows[0]);
-        } else {
-            res.status(404).send('Post not found');
-        }
-    } catch (err) {
-        console.error(err);
+            [id]);
+        res.status(200).json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
         res.status(500).send(err.message);
     }
 });

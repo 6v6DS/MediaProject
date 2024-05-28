@@ -8,29 +8,50 @@
 
         blog.posts = {};
         blog.tab = 'blog';
-
+        
+        // Fetch posts
         $http.get('/recruit')
             .then(function (response) {
                 blog.posts = response.data;
                 blog.posts.forEach(function(post) {
-                    $http.get('/recomment/' + post.id)
-                        .then(function (response) {
-                            post.comments = response.data;
-                        })
-                        .catch(function (error) {
-                            console.error('Error:', error);
-                        });
+                    blog.getPostAndComments(post.id);
+                    blog.getLikes(post);
                 });
             })
             .catch(function (error) {
-                console.error('Error:', error);
+                console.error('Error loading posts:', error);
             });
-
 
         blog.selectTab = function (setTab) {
             blog.tab = setTab;
-            console.log(blog.tab)
+            if (setTab === 'postDetail') {
+                blog.getPostAndComments(post.id);
+                blog.getLikes(post);
+            }
         };
+        
+        // Fetch post, likes and comments
+        blog.getPostAndComments = function(postId) {
+            $http.get('/recruit/' + postId).then(function(response) {
+                var postIndex = blog.posts.findIndex(post => post.id === postId);
+                if (postIndex !== -1) {
+                    blog.posts[postIndex] = response.data.recruits;
+                    blog.posts[postIndex].comments = response.data.comments;
+                }
+            }).catch(function(error) {
+                console.error('Error loading post and comments:', error);
+            });
+        };
+        blog.incrementLikes = function(post) {
+            $http.post('/recruit/' + post.id + '/like')
+                .then(function(response) {
+                    post.likes = response.data.likes;
+                })
+                .catch(function(error) {
+                    console.error("Error updating likes:", error);
+                });
+        };
+
 
         blog.isSelected = function (checkTab) {
             return blog.tab === checkTab;
@@ -44,7 +65,7 @@
                 image: blog.post.image,
                 author: blog.post.author,
                 written: Date.now(),
-                likes: 0,
+                likes: blog.post.likes
             };
         
             $http.post('/recruit', postData)
@@ -76,7 +97,7 @@
                 written: Date.now()
             };
 
-            $http.post('/recomment', newComment)
+            $http.post('/recruit/' + post.id + '/recomment', newComment)
                 .then(function (response) {
                     alert('댓글이 추가되었습니다.');
                     if (!post.comments) {
@@ -91,19 +112,5 @@
                 });
         };
     }]);
-
-
-    // AngularJS 내에서 좋아요 버튼 클릭 처리
-    blog.likePost = function(post) {
-        $http.post('/recruit/' + post.id + '/like')
-            .then(function(response) {
-                post.likes = response.data.likes;
-                alert('좋아요가 추가되었습니다.');
-            })
-            .catch(function(error) {
-                console.error("좋아요 추가 실패:", error);
-            });
-        };
-
 
 })();

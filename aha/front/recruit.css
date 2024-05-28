@@ -65,6 +65,10 @@ ul.post-grid li:hover h3 {
     color: white;
 }
 
+.button-container {
+    text-align: right;
+}
+
 .content {
     width: 100%;
     position: relative;
