@@ -1,39 +1,17 @@
 $(document).ready(function () {
-    show_submit();
+    const params = new URLSearchParams(window.location.search);
+    $('#Title').text(params.get('title') || "Default Title");
+    $('#Date').text(params.get('date') || "Default Date");
+    $('#Price').text(sparams.get('price') || "0");
 });
 
-
-function show_submit() {
-    fetch('/ticket').then((res) => res.json()).then((data) => {
-        let rows = data['result']
-        $('#info').empty()
-        rows.forEach((a) => {
-            let Title = a['Title']
-            let Date = a['Date']
-            let Price = a['Price']
-
-            let temp_html = `<div class="ele data">
-            <h4 class="data__head">Show Title</h4>
-            <p class="data__description" id="Title">${Title}</p>
-         </div>
-         <div class="ele data">
-            <h4 class="data__head">Date</h4>
-            <p class="data__description" id="Date">${Date}</p>
-         </div>
-         <div class="ele data">
-            <h4 class="data__head">Price</h4>
-            <p class="data__description" id="Price">${Price}</p>
-         </div>`
-         $('#info').append(temp_html)
-        })
-    })
-}
-
-
-function show_order() {
-    event.preventDefault(); // 폼 제출 기본 이벤트 방지
+function show_order(event) {
+    event.preventDefault();
 
     var formData = {
+        title: $('#Title').text(),
+        date: $('#Date').text(),
+        price: $('#Price').text(),
         count: $('#count').val(),
         name: $('#name').val(),
         studentid: $('#student_ID').val(),
@@ -49,7 +27,7 @@ function show_order() {
         data: JSON.stringify(formData),
         success: function(response) {
             alert('예매가 완료되었습니다');
-            window.location.href = "./show.html";
+            window.location.href = "show.html";
         },
         error: function(xhr, status, error) {
             console.error('예매 실패:', error);
@@ -57,54 +35,9 @@ function show_order() {
     });
 }
 
-
-
-// Custom Select
-// $('select').each(function () {
-//     var $this = $(this), numberOfOptions = $(this).children('option').length;
-
-//     $this.addClass('select-hidden');
-//     $this.wrap('<div class="select"></div>');
-//     $this.after('<div class="select-styled"></div>');
-
-//     var $styledSelect = $this.next('div.select-styled');
-//     $styledSelect.text($this.children('option').eq(0).text());
-
-//     var $list = $('<ul />', {
-//         'class': 'select-options'
-//     }).insertAfter($styledSelect);
-
-//     for (var i = 0; i < numberOfOptions; i++) {
-//         $('<li />', {
-//             text: $this.children('option').eq(i).text(),
-//             rel: $this.children('option').eq(i).val()
-//         }).appendTo($list);
-//     }
-
-//     var $listItems = $list.children('li');
-
-//     $styledSelect.click(function (e) {
-//         e.stopPropagation();
-//         $('div.select-styled.active').not(this).each(function () {
-//             $(this).removeClass('active').next('ul.select-options').hide();
-//         });
-//         $(this).toggleClass('active').next('ul.select-options').toggle();
-//     });
-
-//     $listItems.click(function (e) {
-//         e.stopPropagation();
-//         $styledSelect.text($(this).text()).removeClass('active');
-//         $this.val($(this).attr('rel'));
-//         $list.hide();
-//         console.log($this.val());
-//     });
-
-//     $(document).click(function () {
-//         $styledSelect.removeClass('active');
-//         $list.hide();
-//     });
-
-// });
+function goBackToShow() {
+    window.location.href = "show.html";
+}
 
 $(function () {
     $('.quick-reservation').hide();

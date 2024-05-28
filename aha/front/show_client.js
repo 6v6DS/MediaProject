@@ -16,7 +16,7 @@ function listing() {
                 <li class="booking-card" style="background-image: url(${a.poster})">
                     <div class="book-container">
                         <div class="content">
-                            <button class="btn" onclick="Form()">예매하기</button>
+                            <button class="btn" onclick="selectShow('${a.title}', '${formattedDate}', '${a.price}')">예매하기</button>
                         </div>
                     </div>
                     <div class="informations-container" onclick="OpenProduct(${index})">
@@ -55,8 +55,10 @@ function OpenProduct(index) {
     $('#modal-price').text(card.price);
     $('#modal-description').text(card.description);
     $('#modal-poster').attr('src', card.poster);
-}
 
+    // 모달의 예매하기 버튼에 selectShow 함수 연결
+    $('.btn.btn-popup').attr('onclick', `selectShow('${card.title}', '${formattedDate}', '${card.price}')`);
+}
 
 function posting() {
     let clubname = $("#clubname").val();
@@ -92,7 +94,7 @@ function posting() {
       .catch(error => console.error('Error:', error));
 }
 
-//검색창 열고닫고
+// 검색창 열고닫고
 function open_box() {
     $('#post-box').show()
 }
@@ -100,16 +102,7 @@ function close_box() {
     $('#post-box').hide()
 }
 
-searchButton.addEventListener("click", posting);
-
-
-// 카드 body를 클릭하면 외부 사이트로 이동하는 함수
-function redirectToExternalSite(url) {
-    // 새 창에서 URL을 엽니다.
-    window.open(url, '_blank');
-}
-
-//뒤로가기
+// 뒤로가기
 function GoBack() {
     $(".lightbox-blanket").toggle();
 }
@@ -120,8 +113,7 @@ function Form(){
     window.location.href = "./ticket.html";
 }
 
-function submitForm() {
-    console.log("공연예매");
-    alert("공연 예매 창으로 이동합니다.");
-    window.location.href = "./ticket.html";
+function selectShow(title, date, price) {
+    const queryParams = new URLSearchParams({ title, date, price });
+    window.location.href = `ticket.html?${queryParams.toString()}`;
 }

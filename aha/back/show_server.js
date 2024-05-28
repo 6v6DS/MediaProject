@@ -51,17 +51,18 @@ app.post('/show', async(req, res) => {
 
 // 참가 신청
 app.post('/ticket', async(req, res) => {
-    const { count, name, studentid, department, phonenum, etc } = req.body;
+    const { title, date, price, count, name, studentid, department, phonenum, etc } = req.body;
     try {
         const query = await pool.query(
-            'INSERT INTO ticket (count, name, studentid, department, phonenum, etc) VALUES ($1, $2, $3, $4, $5, $6)', 
-            [count, name, studentid, department, phonenum, etc]);
-        res.json({ success: true, message: 'Ticketing successfully' });
+            'INSERT INTO ticket (title, date, price, count, name, studentid, department, phonenum, etc) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
+            [title, date, price, count, name, studentid, department, phonenum, etc]);
+        res.json({ success: true, message: 'Ticket booked successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).send({ error: 'Error ticketing' });
+        res.status(500).send({ error: 'Error booking ticket' });
     }
 });
+
 
 
 // Start Server

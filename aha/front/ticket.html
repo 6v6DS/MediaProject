@@ -13,25 +13,27 @@
    <script>
       $(document).ready(function () {
           $("#header").load("header.html");
-      });
-      $(document).ready(function () {
           $("#footer").load("footer.html");
+          const params = new URLSearchParams(window.location.search);
+          $('#Title').text(params.get('title') || "Default Title");
+          $('#Date').text(params.get('date') || "Default Date");
+          $('#Price').text((params.get('price') || "0") + '원');
       });
-    </script>
+   </script>
 </head>
 
 <body>
    <header id="header" class="header"></header>
 
    <br>
-   <form class="quick-reservation">
+   <form class="quick-reservation" onsubmit="return show_order(event)">
 
       <div class="container">
          <header class="quick-reservation__header">
             <h2 class="title">
                SHOW Reservation
             </h2>
-            <div class="close-icon">
+            <div class="close-icon" onclick="goBackToShow()">
                <span></span>
                <span></span>
             </div>
@@ -102,7 +104,7 @@
 
          <footer class="form__footer">
             <div class="footer-wrapper">
-               <input type="submit" onclick="show_order()" value="Reserve" class="">
+               <input type="submit" value="Reserve" class="">
             </div>
          </footer>
       </div>

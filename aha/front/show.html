@@ -23,12 +23,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
     <script>
         $(document).ready(function () {
             $("#header").load("header.html");
-        });
-        $(document).ready(function () {
             $("#footer").load("footer.html");
         });
     </script>
@@ -40,7 +37,7 @@
     <!-- 상단 박스 -->
     <div class="mytitle">
         <h1>동아리 행사/공연</h1>
-        <button onclick="open_box()" onkeyup="enterkeySearch()">공연 정보 추가하기</button>
+        <button onclick="open_box()">공연 정보 추가하기</button>
     </div>
 
     <div class="mypost" id="post-box">
@@ -61,11 +58,11 @@
             <input type="time" class="form-control" id="show-time" name="time">
         </div>        
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="show-location" placeholder="장소"></textarea>
+            <input type="text" class="form-control" id="show-location" placeholder="장소">
             <label for="show-location">장소</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="show-price" placeholder="가격"></textarea>
+            <input type="text" class="form-control" id="show-price" placeholder="가격">
             <label for="show-price">가격</label>
         </div>
         <div class="form-floating">
@@ -101,8 +98,8 @@
                                 <div class="product-clubname" id="modal-clubname">진행 동아리</div>
                             </div>
                             <!-- 눌렀을때 나오는 이미지 -->
-                            <div class="product-image">
-                                <img id="modal-image" src="https://via.placeholder.com/300" />
+                            <div class="product-poster">
+                                <img id="modal-poster" src="https://via.placeholder.com/300" />
                             </div>
                         </div>
                         <!-- 이게 카드 오른쪽에 나오는 정보 -->
@@ -124,7 +121,7 @@
                                 공연에 대한 상세 정보
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-popup" onclick="submitForm()">참여(예매) 신청하기</button>
+                                <button type="button" class="btn btn-popup" onclick="selectShow()">참여(예매) 신청하기</button>
                             </div>
                         </div>
                     </div>
@@ -141,7 +138,7 @@
             style="background-image: url(https://images.unsplash.com/photo-1578944032637-f09897c5233d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ)">
             <div class="book-container">
                 <div class="content">
-                    <button class="btn" onclick="Form()">예매하기</button>
+                    <button class="btn" onclick="selectShow()">예매하기</button>
                 </div>
             </div>
             <div class="informations-container" onclick="OpenProduct(1)">
