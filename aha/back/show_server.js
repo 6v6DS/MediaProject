@@ -27,7 +27,7 @@ const pool = new Pool({
 // 공연/행사 정보
 app.get('/show', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM show ORDER BY date DESC');
+        const result = await pool.query('SELECT * FROM show ORDER BY date ASC');
         res.json({ result: result.rows });
     } catch (error) {
         console.error(error);
