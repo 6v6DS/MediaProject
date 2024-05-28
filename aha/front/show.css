@@ -142,7 +142,7 @@ ul .booking-card .informations-container {
   flex: 1 0 auto;
   padding: 20px;
   background: #f0f0f0;
-  transform: translateY(206px);
+  transform: translateY(125px);
   transition: 0.3s;
   cursor: pointer;
 }
