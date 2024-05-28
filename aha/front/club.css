@@ -231,14 +231,13 @@ line-height: 1;
 margin: -2px;
 }
 
-/* 팝업 글씨 */
+/* 팝업 */
 .product-clubname {
 margin-top: 10px;
 font-size: 40px;
 color: #888;
 }
 
-/* 팝업 가격 */
 .product-category {
   margin-top: 10px;
 color: #222;

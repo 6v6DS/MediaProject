@@ -410,15 +410,14 @@ margin: -2px;
 /* 팝업 글씨 */
 .product-title {
 margin-top: 10px;
-font-size: 20px;
+font-size: 40px;
 color: #888;
 }
 
-/* 팝업 가격 */
-.product-price {
+.product-clubname {
   margin-top: 10px;
 color: #222;
-font-size: 24px;
+font-size: 20px;
 letter-spacing: 1px;
 }
 
@@ -430,21 +429,51 @@ padding-left: 3px;
 }
 
 /* 이미지 조정 */
-.product-image {
+.product-poster {
 padding: 10px 10px 0 10px;
 }
 
 /* 이미지 조정 */
-.product-image img {
+.product-poster img {
 width: 100%;
 height: 100%;
 object-fit: contain;
-height: 295px;
+height: 600px;
 }
 
-/* 이 밑에 다 그거 팝업  */
+.product-date {
+  margin-top: 10px;
+color: #222;
+font-size: 20px;
+letter-spacing: 1px;
+}
+
+.product-time {
+  margin-top: 10px;
+color: #222;
+font-size: 20px;
+letter-spacing: 1px;
+}
+
+.product-location {
+  margin-top: 10px;
+color: #222;
+font-size: 20px;
+letter-spacing: 1px;
+}
+
+.product-price {
+  margin-top: 10px;
+color: #222;
+font-size: 20px;
+letter-spacing: 1px;
+}
+
 .product-description {
-line-height: 1.5;
+  margin-top: 10px;
+color: #222;
+font-size: 17px;
+letter-spacing: 1px;
 }
 
 .product-available {

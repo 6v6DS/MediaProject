@@ -1,4 +1,3 @@
-
 // $(document).ready(function(){
 //     show_submit();
 // });
@@ -21,7 +20,7 @@ async function fetchClubNames() {
     const input = document.getElementById("clubNameInput").value;
     const suggestionsDiv = document.getElementById("suggestions");
 
-    const response = await fetch('http://localhost:3000/club?clubName=' + input);
+    const response = await fetch('http://localhost:3003/clubinfo?clubName=' + input);
     const data = await response.json();
 
     // Clear previous suggestions
@@ -68,7 +67,7 @@ async function submitApplication(event) {
         if (response.ok) {
             const data = await response.json();
             alert('신청이 완료되었습니다');
-            window.location.href = "/club.html";
+            window.location.href = "http://localhost:3003/club.html";
         } else {
             throw new Error(data.error || 'Unknown Error');
         }

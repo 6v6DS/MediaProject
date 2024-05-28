@@ -19,7 +19,7 @@ let index = {
             dataType: "json",
             success: function(response) {
                 console.log(response);
-                window.location.href = '/club.html';
+                window.location.href = 'http://localhost:3003/club.html';
             },
             error: function(xhr, status, error) {
                 alert("로그인 실패: " + xhr.responseJSON.message);
