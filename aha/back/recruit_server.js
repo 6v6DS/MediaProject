@@ -67,7 +67,7 @@ app.get('/recruit/:id', async(req, res) => {
     }
 });
 
-// 신규 동아리 댓글
+// 댓글 추가
 app.post('/recruit/:id/recomment', async(req, res) => {
     const { body, author } = req.body;
     const recruit_id = req.params.id;
@@ -82,7 +82,7 @@ app.post('/recruit/:id/recomment', async(req, res) => {
     }
 });
 
-// 신규 동아리 좋아요
+// 신규 동아리 좋아요 클릭
 app.post('/recruit/:id/like', async (req, res) => {
     try {
         const id = req.params.id;

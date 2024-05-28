@@ -22,6 +22,7 @@
                 console.error('Error loading posts:', error);
             });
 
+
         blog.selectTab = function (setTab) {
             blog.tab = setTab;
             if (setTab === 'postDetail') {
@@ -70,7 +71,7 @@
         
             $http.post('/recruit', postData)
                 .then(function (response) {
-                    alert('게시물이 추가되었습니다.');
+                    alert('게시글이 추가되었습니다.');
                     blog.posts.unshift(blog.post);
                     blog.post = {};
                     blog.tab = 'blog';

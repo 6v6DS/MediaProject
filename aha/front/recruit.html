@@ -78,10 +78,8 @@
                                 ng-click="blog.selectTab($index)">
                                 <h3>{{post.title}}</h3>
                                 <p>{{post.body[0] | limitTo:70}}...</p>
-                                <p class="fa fa-comment push-left"> {{post.comments.length}}
-                                </p>
-                                <p class="fa fa-heart push-right"> {{post.likes}}
-                                </p>
+                                <p class="fa fa-comment push-left"> {{post.comments.length}}</p>
+                                <p class="fa fa-heart push-right"> {{post.likes}}</p>
                             </li>
                         </ul>
                         
@@ -98,6 +96,7 @@
                                     <p>{{post.body}}</p>
                                 </div>
                                 
+                                <!--코멘트-->
                                 <div class="comments" ng-controller="CommentController as commentCtrl">
                                     <div class="button-container">
                                         <button class="fa fa-heart" ng-click="blog.incrementLikes(post)"> {{post.likes}}</button>
@@ -150,10 +149,9 @@
 
                     </div>
                 </div>
-
             </div>
+            
         </div>
-
 
     </body>
 

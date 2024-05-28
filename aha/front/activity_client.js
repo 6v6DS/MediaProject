@@ -9,28 +9,39 @@
         blog.posts = {};
         blog.tab = 'blog';
 
+        // Fetch posts
         $http.get('/activity')
             .then(function (response) {
                 blog.posts = response.data;
                 blog.posts.forEach(function(post) {
-                    $http.get('/actcomment/' + post.id)
-                        .then(function (response) {
-                            post.comments = response.data;
-                        })
-                        .catch(function (error) {
-                            console.error('Error:', error);
-                        });
+                    blog.getPostAndComments(post.id);
                 });
             })
             .catch(function (error) {
-                console.error('Error:', error);
+                console.error('Error loading posts:', error);
             });
 
 
         blog.selectTab = function (setTab) {
             blog.tab = setTab;
-            console.log(blog.tab)
+            if (setTab === 'postDetail') {
+                blog.getPostAndComments(post.id);
+            }
         };
+
+        // Fetch post and comments
+        blog.getPostAndComments = function(postId) {
+            $http.get('/activity/' + postId).then(function(response) {
+                var postIndex = blog.posts.findIndex(post => post.id === postId);
+                if (postIndex !== -1) {
+                    blog.posts[postIndex] = response.data.activities;
+                    blog.posts[postIndex].comments = response.data.comments;
+                }
+            }).catch(function(error) {
+                console.error('Error loading post and comments:', error);
+            });
+        };
+
 
         blog.isSelected = function (checkTab) {
             return blog.tab === checkTab;
@@ -46,10 +57,9 @@
                 written: Date.now()
             };
             
-            console.log(postData);
             $http.post('/activity', postData)
                 .then(function (response) {
-                    alert('게시물이 추가되었습니다.');
+                    alert('게시글이 추가되었습니다.');
                     blog.posts.unshift(blog.post);
                     blog.post = {};
                     blog.tab = 'blog';
@@ -60,9 +70,6 @@
                 });
         };
         
-
-
-
     }]);
 
 
@@ -79,7 +86,7 @@
                 written: Date.now()
             };
 
-            $http.post('/actcomment', newComment)
+            $http.post('/activity/' + post.id + '/actcomment', newComment)
                 .then(function (response) {
                     alert('댓글이 추가되었습니다.');
                     if (!post.comments) {

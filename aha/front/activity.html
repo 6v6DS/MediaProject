@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>활동내역 추가</title>
+    <title>활동 내역</title>
     <link rel="stylesheet" href="./activity.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-    <header id="header"></header>
+    <div id="header"></div>
     <body ng-app="blogApp">
         <div ng-controller="BlogController as blog">
             <!-- 상단바 -->
@@ -78,8 +78,7 @@
                                 ng-click="blog.selectTab($index)">
                                 <h3>{{post.title}}</h3>
                                 <p>{{post.body[0] | limitTo:70}}...</p>
-                                <p class="fa fa-comment push-left"> {{post.comments.length}}
-                                </p>
+                                <p class="fa fa-comment push-left"> {{post.comments.length}}</p>
                             </li>
                         </ul>
                         
@@ -90,13 +89,15 @@
                                 <h2>{{post.title}}</h2>
                                 <img src="{{post.image}}" ng-show="{{post.image}}" />
                                 <cite>by {{post.clubname}} on {{post.written | date}}</cite>
+                                <br>
+                                <br>
                                 <div class="post-body">
-                                    <p ng-repeat="paragraph in post.body">
-                                        {{paragraph}}
-                                    </p>
+                                    <p>{{post.body}}</p>
                                 </div>
 
+                                <!--코멘트-->
                                 <div class="comments" ng-controller="CommentController as commentCtrl">
+                                    <br>
                                     <br>
                                     <h3>코멘트</h3>
                                     <ul>
@@ -107,7 +108,7 @@
                                     </ul>
                                     <form name="commentForm"
                                         ng-submit="commentForm.$valid && commentCtrl.addComment(post)" novalidate>
-
+                                        <br>
                                         <br>
                                         <h4>코멘트 추가하기</h4>
                                         <textarea ng-model="commentCtrl.comment.body" cols="20" rows="10"
@@ -144,10 +145,9 @@
 
                     </div>
                 </div>
-
             </div>
-        </div>
 
+        </div>
 
     </body>
 
