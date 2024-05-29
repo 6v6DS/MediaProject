@@ -17,7 +17,7 @@
           const params = new URLSearchParams(window.location.search);
           $('#Title').text(params.get('title') || "Default Title");
           $('#Date').text(params.get('date') || "Default Date");
-          $('#Price').text((params.get('price') || "0") + '원');
+          $('#Price').text(params.get('price') || "0");
       });
    </script>
 </head>
